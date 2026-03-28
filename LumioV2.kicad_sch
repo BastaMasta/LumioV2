@@ -3522,6 +3522,173 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Diode:1N4148WT"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "1N4148WT"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Diode_SMD:D_SOD-523"
+				(at 0 -4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "D*SOD?523*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "1N4148WT_0_1"
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "1N4148WT_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Diode:1N5821"
 			(pin_numbers
 				(hide yes)
@@ -4392,6 +4559,18 @@
 		(uuid 5b08575f-107c-4962-bce5-1551971b9407)
 	)
 	(rectangle
+		(start 180.34 116.84)
+		(end 251.46 165.1)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid 6a7cbebc-b16d-4038-b064-c7094183c1e0)
+	)
+	(rectangle
 		(start 82.55 16.51)
 		(end 124.46 34.29)
 		(stroke
@@ -4445,11 +4624,27 @@
 		)
 		(uuid "ebe02a4d-098b-4aba-818c-bb26a6426d21")
 	)
+	(text "L298N Motor Control Segment\n"
+		(exclude_from_sim no)
+		(at 236.22 118.364 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "ffbb1f51-0ee3-40f5-aea2-41df3f639d0e")
+	)
 	(junction
 		(at 90.17 43.18)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0b23a2d4-a9b4-4d94-bc94-e319e71b6269")
+	)
+	(junction
+		(at 228.6 142.24)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "13831f7f-1b6e-409c-86d8-e580987b0c2e")
 	)
 	(junction
 		(at 111.76 148.59)
@@ -4462,6 +4657,24 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "30fa1ec7-6d7d-469e-b1ce-c690fe61341a")
+	)
+	(junction
+		(at 190.5 163.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "33f18750-46a2-498c-b9f7-6cef2ded109d")
+	)
+	(junction
+		(at 238.76 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "341d82a0-5ad1-49c6-8cd5-7e5a7fea2f89")
+	)
+	(junction
+		(at 233.68 147.32)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "38a495c8-ed64-4653-90df-1d9b4f7cc56e")
 	)
 	(junction
 		(at 114.3 176.53)
@@ -4488,6 +4701,18 @@
 		(uuid "541bdf25-1f2f-4f5b-8a22-5f2e71014dac")
 	)
 	(junction
+		(at 223.52 139.7)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b9e78ba-31e3-4ab5-a7cc-c295db96eec3")
+	)
+	(junction
+		(at 223.52 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e83672a-e307-4f6d-b168-0aa1e77ef936")
+	)
+	(junction
 		(at 101.6 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4500,10 +4725,28 @@
 		(uuid "6b844a49-adbc-4290-9d88-b8c49616e20e")
 	)
 	(junction
+		(at 228.6 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7cb68125-8cb2-4ce2-ab54-405c6e3528bc")
+	)
+	(junction
+		(at 233.68 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8d2f2020-9e06-4960-92a1-b18c93799d3a")
+	)
+	(junction
 		(at 83.82 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9b94a31e-e951-46ed-a264-bea5b98989da")
+	)
+	(junction
+		(at 228.6 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a89f7aae-b378-49d0-8f70-046c6669ce40")
 	)
 	(junction
 		(at 198.12 127)
@@ -4524,6 +4767,12 @@
 		(uuid "b68f347b-00f2-4f55-8add-901303e96a6b")
 	)
 	(junction
+		(at 193.04 163.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bb8da37c-852e-4292-bb93-d27fcfba7d3b")
+	)
+	(junction
 		(at 114.3 173.99)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4536,6 +4785,18 @@
 		(uuid "beecad4c-4863-4f79-b0d9-6d0433dc330e")
 	)
 	(junction
+		(at 212.09 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c5f066af-ccca-47a5-9a62-b2a74ada27fa")
+	)
+	(junction
+		(at 233.68 128.27)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "da893ef2-f365-4180-9e39-0f36d1e74be8")
+	)
+	(junction
 		(at 97.79 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4546,6 +4807,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dd71078c-c15c-43ab-9c74-1fe8e142bc97")
+	)
+	(junction
+		(at 223.52 161.29)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ddf8fc46-dd2d-48c6-82a6-aed2669520de")
 	)
 	(junction
 		(at 97.79 39.37)
@@ -4597,6 +4864,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 128.27) (xy 228.6 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0453a98b-fc77-4ad3-a432-87401cefcf7f")
+	)
+	(wire
+		(pts
 			(xy 76.2 137.16) (xy 182.88 137.16)
 		)
 		(stroke
@@ -4604,6 +4881,16 @@
 			(type default)
 		)
 		(uuid "04d1ca05-b0f0-4831-8717-8df61fbd7509")
+	)
+	(wire
+		(pts
+			(xy 228.6 142.24) (xy 228.6 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07493a20-c822-4a79-9164-f88bf4e7dc9b")
 	)
 	(wire
 		(pts
@@ -4624,6 +4911,16 @@
 			(type default)
 		)
 		(uuid "096104bc-7fa7-47f0-bac6-95b3d4a76bb2")
+	)
+	(wire
+		(pts
+			(xy 212.09 128.27) (xy 212.09 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0995dd92-4921-47c4-89f0-a5b8057ace62")
 	)
 	(wire
 		(pts
@@ -4674,6 +4971,16 @@
 			(type default)
 		)
 		(uuid "187051c1-d9ce-4cb1-9cc5-b41e31d9159f")
+	)
+	(wire
+		(pts
+			(xy 228.6 128.27) (xy 223.52 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b24cc70-8f59-415f-ab44-89f08c0f06ea")
 	)
 	(wire
 		(pts
@@ -4757,6 +5064,26 @@
 	)
 	(wire
 		(pts
+			(xy 238.76 135.89) (xy 238.76 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35ac83fa-64da-49b1-8198-ce33b3c132bc")
+	)
+	(wire
+		(pts
+			(xy 233.68 135.89) (xy 233.68 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35e72ed6-5c75-401b-bec4-650734831dd6")
+	)
+	(wire
+		(pts
 			(xy 119.38 165.1) (xy 119.38 185.42)
 		)
 		(stroke
@@ -4777,7 +5104,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 149.86) (xy 246.38 149.86)
+			(xy 213.36 149.86) (xy 238.76 149.86)
 		)
 		(stroke
 			(width 0)
@@ -4804,6 +5131,16 @@
 			(type default)
 		)
 		(uuid "3b63a24d-9fdb-4e20-bc6a-6e1ca3125034")
+	)
+	(wire
+		(pts
+			(xy 223.52 139.7) (xy 223.52 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b7d2124-e17a-4898-bbbb-e0f2a8766de0")
 	)
 	(wire
 		(pts
@@ -4887,6 +5224,16 @@
 	)
 	(wire
 		(pts
+			(xy 223.52 135.89) (xy 223.52 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b25c115-7bf1-48b2-86d8-31080961f1ae")
+	)
+	(wire
+		(pts
 			(xy 111.76 165.1) (xy 114.3 165.1)
 		)
 		(stroke
@@ -4894,6 +5241,16 @@
 			(type default)
 		)
 		(uuid "4c3aa351-c4a1-4e93-bb46-a8aadef66c21")
+	)
+	(wire
+		(pts
+			(xy 215.9 158.75) (xy 220.98 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e55ed40-e899-4e58-b5f6-86a65b8cd213")
 	)
 	(wire
 		(pts
@@ -4937,6 +5294,16 @@
 	)
 	(wire
 		(pts
+			(xy 190.5 162.56) (xy 190.5 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b0a43ca-a950-4a41-a2ab-866e0612abe6")
+	)
+	(wire
+		(pts
 			(xy 115.57 142.24) (xy 182.88 142.24)
 		)
 		(stroke
@@ -4944,6 +5311,16 @@
 			(type default)
 		)
 		(uuid "5c0e0044-417a-4e1c-89d7-3f19eb05ce75")
+	)
+	(wire
+		(pts
+			(xy 238.76 149.86) (xy 246.38 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fbb20b9-5749-42b3-ae51-3d8b3dc856b1")
 	)
 	(wire
 		(pts
@@ -4974,6 +5351,16 @@
 			(type default)
 		)
 		(uuid "64fc6f24-a203-4198-b0a5-ba3a5c38b374")
+	)
+	(wire
+		(pts
+			(xy 233.68 147.32) (xy 233.68 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6601ac87-0fee-452b-ba57-91b15d75001f")
 	)
 	(wire
 		(pts
@@ -5107,7 +5494,7 @@
 	)
 	(wire
 		(pts
-			(xy 182.88 163.83) (xy 198.12 163.83)
+			(xy 182.88 163.83) (xy 190.5 163.83)
 		)
 		(stroke
 			(width 0)
@@ -5197,6 +5584,26 @@
 	)
 	(wire
 		(pts
+			(xy 220.98 161.29) (xy 223.52 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a85f4bf-d2ff-4a6f-a0ba-e724b30fbd35")
+	)
+	(wire
+		(pts
+			(xy 193.04 162.56) (xy 193.04 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8df73470-4763-4ab2-8a64-7663b4bdaa7a")
+	)
+	(wire
+		(pts
 			(xy 97.79 71.12) (xy 115.57 71.12)
 		)
 		(stroke
@@ -5214,6 +5621,16 @@
 			(type default)
 		)
 		(uuid "90b9e910-5b08-4a72-aeaf-c8509b361863")
+	)
+	(wire
+		(pts
+			(xy 223.52 139.7) (xy 246.38 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "921e8f15-508d-4d68-b1b3-5e180acccd30")
 	)
 	(wire
 		(pts
@@ -5244,6 +5661,16 @@
 			(type default)
 		)
 		(uuid "975b4110-8e95-4829-a233-c750e031a24c")
+	)
+	(wire
+		(pts
+			(xy 228.6 135.89) (xy 228.6 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99a1bbd2-b5c2-4eab-a8c7-31a36f6ee733")
 	)
 	(wire
 		(pts
@@ -5297,6 +5724,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 161.29) (xy 238.76 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a60b3280-6e56-4732-b968-6eb9ccd4f0c2")
+	)
+	(wire
+		(pts
 			(xy 90.17 30.48) (xy 90.17 43.18)
 		)
 		(stroke
@@ -5337,13 +5774,33 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 139.7) (xy 246.38 139.7)
+			(xy 223.52 128.27) (xy 212.09 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa9c53b9-da5e-4e39-93a9-993948a12881")
+	)
+	(wire
+		(pts
+			(xy 213.36 139.7) (xy 223.52 139.7)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "af4c9f18-d71d-46e6-afdf-48a0117ded90")
+	)
+	(wire
+		(pts
+			(xy 223.52 161.29) (xy 228.6 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbb24b38-1702-4f75-ace1-e9fe195d9419")
 	)
 	(wire
 		(pts
@@ -5354,6 +5811,16 @@
 			(type default)
 		)
 		(uuid "bc4c48c7-e7b3-4d4d-bb78-be84afec26cb")
+	)
+	(wire
+		(pts
+			(xy 190.5 163.83) (xy 193.04 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be838ab8-e366-4b29-af0c-3c134a7010b7")
 	)
 	(wire
 		(pts
@@ -5397,6 +5864,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 147.32) (xy 246.38 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5172981-a948-4f21-b3bb-eb05751f218e")
+	)
+	(wire
+		(pts
 			(xy 106.68 58.42) (xy 97.79 58.42)
 		)
 		(stroke
@@ -5407,7 +5884,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 147.32) (xy 246.38 147.32)
+			(xy 213.36 147.32) (xy 233.68 147.32)
 		)
 		(stroke
 			(width 0)
@@ -5424,6 +5901,16 @@
 			(type default)
 		)
 		(uuid "d00f1ab0-ddb7-45fc-a441-5f52e91b799f")
+	)
+	(wire
+		(pts
+			(xy 193.04 163.83) (xy 198.12 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d34eede5-5dcf-47d8-b9d9-724ee38a425e")
 	)
 	(wire
 		(pts
@@ -5487,7 +5974,17 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 119.38) (xy 212.09 119.38)
+			(xy 228.6 161.29) (xy 233.68 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d9593864-e8e1-4655-82b2-de29d3dcc0be")
+	)
+	(wire
+		(pts
+			(xy 219.71 119.38) (xy 212.09 119.38)
 		)
 		(stroke
 			(width 0)
@@ -5547,6 +6044,16 @@
 	)
 	(wire
 		(pts
+			(xy 220.98 158.75) (xy 220.98 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1671cae-7eb7-4a65-977f-d3ed57b1f6c4")
+	)
+	(wire
+		(pts
 			(xy 78.74 93.98) (xy 78.74 41.91)
 		)
 		(stroke
@@ -5554,6 +6061,26 @@
 			(type default)
 		)
 		(uuid "e1a96941-a187-45c0-999d-ecab842b82a7")
+	)
+	(wire
+		(pts
+			(xy 238.76 128.27) (xy 233.68 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e28f41bc-7635-41e7-bfe3-f0890a13e8d2")
+	)
+	(wire
+		(pts
+			(xy 228.6 142.24) (xy 213.36 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e443329a-41db-42cb-a42c-e99d53a35e74")
 	)
 	(wire
 		(pts
@@ -5587,7 +6114,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 142.24) (xy 213.36 142.24)
+			(xy 246.38 142.24) (xy 228.6 142.24)
 		)
 		(stroke
 			(width 0)
@@ -5604,6 +6131,16 @@
 			(type default)
 		)
 		(uuid "f2fbd81b-1cd8-47de-a177-83115a6b2d19")
+	)
+	(wire
+		(pts
+			(xy 238.76 149.86) (xy 238.76 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f489c412-4121-49a9-9591-6f273c2a8537")
 	)
 	(wire
 		(pts
@@ -5879,6 +6416,94 @@
 			(project "LumioV2"
 				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
 					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 238.76 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0c8c1d16-6fe1-47a8-80e4-1c11dd115323")
+		(property "Reference" "D9"
+			(at 238.6359 129.794 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 243.84 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 234.315 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 238.76 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 238.76 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 238.76 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 238.76 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "488db266-e1f0-49ab-9825-2d66e3457853")
+		)
+		(pin "1"
+			(uuid "e75aada6-f1a6-4ae4-9121-d884cfa13cd2")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D9")
 					(unit 1)
 				)
 			)
@@ -6203,8 +6828,184 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 233.68 157.48 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "290265da-1eb8-4288-8df8-1bf902a143d3")
+		(property "Reference" "D4"
+			(at 234.95 163.322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 238.76 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 229.235 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 233.68 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 233.68 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 233.68 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 233.68 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "2e07ff40-c517-47b5-a28d-4a39f24f7670")
+		)
+		(pin "1"
+			(uuid "1e0cf549-7dc0-43f8-be7f-78eb6e856553")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 228.6 157.48 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3145d735-b2b2-47c1-9768-05a92a0a88f0")
+		(property "Reference" "D3"
+			(at 229.87 163.322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 233.68 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 224.155 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 228.6 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 228.6 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 228.6 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 228.6 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d63e1144-2e3f-4460-a265-dd856af289d0")
+		)
+		(pin "1"
+			(uuid "3faa62c9-2712-4870-b5ee-566da95cdc5c")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
-		(at 222.25 119.38 0)
+		(at 219.71 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6213,7 +7014,7 @@
 		(fields_autoplaced yes)
 		(uuid "3183f2e5-4b5c-46b6-aaf7-667b46258fcf")
 		(property "Reference" "#PWR03"
-			(at 222.25 125.73 0)
+			(at 219.71 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6222,7 +7023,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 222.25 124.46 0)
+			(at 219.71 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6230,7 +7031,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 222.25 119.38 0)
+			(at 219.71 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6239,7 +7040,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 222.25 119.38 0)
+			(at 219.71 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6248,7 +7049,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 222.25 119.38 0)
+			(at 219.71 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6811,7 +7612,7 @@
 		(dnp no)
 		(uuid "41733d89-6bce-426e-9b59-3782897bc824")
 		(property "Reference" "C5"
-			(at 215.392 120.65 0)
+			(at 211.582 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6820,7 +7621,7 @@
 			)
 		)
 		(property "Value" "100uF"
-			(at 218.44 118.618 0)
+			(at 212.09 118.618 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6995,6 +7796,160 @@
 			(project "LumioV2"
 				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
 					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 215.9 158.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "64e90144-8a99-4975-94ed-c2729f5888fb")
+		(property "Reference" "#PWR014"
+			(at 215.9 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 215.9 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 215.9 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 215.9 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 215.9 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "41b79b08-5107-4250-ae10-1f6cb45c2545")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "#PWR014")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 238.76 157.48 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6af6db60-de7c-4642-b996-75ece0bf33db")
+		(property "Reference" "D5"
+			(at 240.03 163.322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 243.84 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 234.315 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 238.76 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 238.76 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 238.76 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 238.76 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f51cecda-7050-4cd2-82c2-8165769c4202")
+		)
+		(pin "1"
+			(uuid "cabe316e-b2e2-4c74-a6d4-f19bb62d936f")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -7218,8 +8173,96 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 223.52 157.48 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7d9fb21e-9b9f-4a4f-90a6-8d1ab026e49b")
+		(property "Reference" "D2"
+			(at 224.79 163.322 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 228.6 165.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 219.075 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 223.52 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 223.52 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 223.52 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 223.52 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d726076f-833f-4ae6-baf3-96dd883a97c6")
+		)
+		(pin "1"
+			(uuid "0b79f48e-eea2-4db3-826e-412891c29d51")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector_Generic:Conn_02x12_Odd_Even")
-		(at 179.07 72.39 0)
+		(at 144.78 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7228,7 +8271,7 @@
 		(fields_autoplaced yes)
 		(uuid "80e160b6-a3cc-4a64-8980-099da4b3f01e")
 		(property "Reference" "J5"
-			(at 180.34 53.34 0)
+			(at 146.05 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7236,7 +8279,7 @@
 			)
 		)
 		(property "Value" "Display Connector"
-			(at 180.34 55.88 0)
+			(at 146.05 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7244,7 +8287,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_2x12_P1.00mm_Vertical"
-			(at 179.07 72.39 0)
+			(at 144.78 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7253,7 +8296,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 179.07 72.39 0)
+			(at 144.78 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7262,7 +8305,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x12, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 179.07 72.39 0)
+			(at 144.78 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7478,6 +8521,94 @@
 			(project "LumioV2"
 				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 228.6 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9ba4e8cc-af42-426a-af8e-e63156c3562c")
+		(property "Reference" "D7"
+			(at 228.4759 129.794 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 233.68 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 224.155 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 228.6 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 228.6 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 228.6 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 228.6 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "7fe8130c-2d6c-4ac6-a26e-f2a0051bf0cc")
+		)
+		(pin "1"
+			(uuid "18465310-012e-4b50-bfa5-938c32604258")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D7")
 					(unit 1)
 				)
 			)
@@ -7835,6 +8966,94 @@
 		)
 	)
 	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 233.68 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d1baf4d8-6351-4b46-9b7b-55e1c653a0f7")
+		(property "Reference" "D8"
+			(at 233.5559 129.794 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 238.76 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 229.235 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 233.68 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 233.68 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 233.68 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 233.68 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "95b1ae76-7f71-49dc-84f3-633b80549625")
+		)
+		(pin "1"
+			(uuid "c71fc861-8ba2-44d6-bcc1-5b63600bbf68")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 83.82 58.42 0)
 		(unit 1)
@@ -7894,6 +9113,94 @@
 			(project "LumioV2"
 				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
 					(reference "#PWR06")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:1N4148WT")
+		(at 223.52 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d64a5024-012e-4220-a32b-55501a4e7a5c")
+		(property "Reference" "D6"
+			(at 223.3959 129.794 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N4148WT"
+			(at 228.6 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 219.075 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
+			(at 223.52 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
+			(at 223.52 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 223.52 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 223.52 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fd823bc2-f713-4b19-948e-d92e74f77218")
+		)
+		(pin "1"
+			(uuid "9fe1dd74-a653-48e5-bc33-7404f21f7c9b")
+		)
+		(instances
+			(project "LumioV2"
+				(path "/3846334d-19c4-4a22-b295-63d299434ecf"
+					(reference "D6")
 					(unit 1)
 				)
 			)
