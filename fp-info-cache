@@ -1,4 +1,4 @@
-27359184597273681
+27371611923611617
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -71939,6 +71939,27 @@ Yellow 5381 Series LED
 2
 2
 LM2577T
+DFN_XGIQ TR_WIN
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+LM2577T
+DFN_XGIQ TR_WIN-L
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+LM2577T
+DFN_XGIQ TR_WIN-M
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+LM2577T
 T05A_TEX
 
 LM2577T-ADJ/NOPB 
@@ -108051,3 +108072,31 @@ Varistor VF
 0
 2
 2
+footprints
+DFN_XGIQ TR_WIN
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+footprints
+DFN_XGIQ TR_WIN-L
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+footprints
+DFN_XGIQ TR_WIN-M
+
+W25Q64JVXGIQ TR 
+0
+9
+9
+footprints
+T05A_TEX
+
+LM2577T-ADJ/NOPB 
+0
+5
+5

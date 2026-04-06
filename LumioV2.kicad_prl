@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 39,
+    "active_layer": 0,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [
@@ -15,10 +15,6 @@
       "Net-(D2-A)",
       "/SCL",
       "/SDA",
-      "Net-(J5-Pin_40)",
-      "Net-(J5-Pin_36)",
-      "Net-(J5-Pin_35)",
-      "Net-(J5-Pin_38)",
       "Net-(J11-Pin_3)",
       "Net-(J12-Pin_3)",
       "Net-(J13-Pin_3)",
@@ -26,7 +22,6 @@
       "Net-(J15-Pin_3)",
       "Net-(J16-Pin_3)",
       "Net-(J17-Pin_3)",
-      "Net-(J18-Pin_3)",
       "Net-(U1-COMP)",
       "+1V1",
       "Net-(J20-Pin_4)",
@@ -78,7 +73,7 @@
       "Net-(J3-Pin_3)",
       "Net-(J3-Pin_21)",
       "Net-(J3-Pin_13)",
-      "Net-(J3-Pin_25)",
+      "Net-(J3-Pin_2)",
       "Net-(J3-Pin_18)",
       "Net-(J3-Pin_7)",
       "Net-(J3-Pin_15)",
@@ -88,7 +83,7 @@
       "Net-(J3-Pin_22)",
       "Net-(J3-Pin_14)",
       "Net-(J3-Pin_11)",
-      "Net-(J3-Pin_26)",
+      "Net-(J3-Pin_1)",
       "Net-(J3-Pin_24)",
       "Net-(J3-Pin_10)",
       "Net-(J3-Pin_16)",
@@ -177,6 +172,8 @@
       false,
       false,
       false,
+      false,
+      false,
       false
     ],
     "col_order": [
@@ -189,7 +186,9 @@
       6,
       7,
       8,
-      9
+      9,
+      10,
+      11
     ],
     "col_widths": [
       186,
@@ -200,6 +199,8 @@
       112,
       112,
       83,
+      112,
+      112,
       112,
       112
     ],
