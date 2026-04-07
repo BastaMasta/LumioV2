@@ -1,0 +1,36 @@
+# Lumio Educational Robot Platform — Python Dependencies
+# Install with: pip install -r requirements.txt
+#
+# External installs required (not pip):
+#   Ollama:  curl -fsSL https://ollama.com/install.sh | sh
+#            ollama pull phi3:mini
+#   Piper:   wget https://github.com/rhasspy/piper/releases/download/v1.2.0/piper_arm64.tar.gz
+#            tar -xzf piper_arm64.tar.gz -C ~/piper/
+#   Vosk:    Download model from https://alphacephei.com/vosk/models
+#            e.g. vosk-model-en-us-0.22-lgraph (~128MB, good for RPi 5)
+
+# Speech recognition (offline STT)
+vosk==0.3.45
+
+# Audio capture
+PyAudio==0.2.14
+
+# GPIO control (Raspberry Pi 5)
+gpiozero==2.0.1
+
+# SPI for direct MCP3008 access (if not going via RP2040 proxy)
+spidev==3.6
+
+# Serial communication with RP2040
+pyserial==3.5
+
+# WiFi control server
+flask==3.0.3
+flask-socketio==5.3.6
+eventlet==0.36.1
+
+# Bluetooth control (optional — requires libbluetooth-dev)
+# PyBluez==0.30
+
+# HTTP client for Ollama API
+requests==2.32.3

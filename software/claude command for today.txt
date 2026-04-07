@@ -1,0 +1,9 @@
+i was planning on running the software with uv for better portability and easy dependency resolving. i have also attached the old code, for you to use as a reference, and the schematic is also attached to help you notice changes in the pin connections. also, the ultrasonic sensors are hooked up directly to the raspberry pi 5 for faster obstacle detection and avoidance. the rp2040 only exists to provide extra gpios, which are free by default, and can be programmed(via a web-interface) to use sensors by the user.
+
+
+
+also, i need this flow: turn on -> wifi not configured/found -> turn on hotspot -> user connect to hotspot and enter login details for wifi -> connect to wifi
+
+
+
+also can you go over evereything and make sure everything works?

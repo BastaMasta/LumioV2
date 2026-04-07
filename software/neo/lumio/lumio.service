@@ -1,0 +1,29 @@
+[Unit]
+Description=Lumio V2 Educational Robot Platform
+Documentation=https://github.com/your-org/lumio
+# Wait for network stack but don't require actual connectivity
+# (the app handles WiFi provisioning itself)
+After=network.target NetworkManager.service
+Wants=NetworkManager.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/lumio
+# uv run resolves deps from pyproject.toml and executes in the managed venv
+ExecStart=/usr/local/bin/uv run python -m lumio.main
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=lumio
+
+# Give the process time to finish WiFi provisioning before systemd gives up
+TimeoutStartSec=120
+
+# Environment overrides (optional)
+# Environment=LUMIO_PORT=80
+# Environment=LUMIO_LOG=/var/log/lumio/lumio.log
+
+[Install]
+WantedBy=multi-user.target

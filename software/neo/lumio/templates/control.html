@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumio V2 – Control</title>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<style>
+:root {
+  --bg:       #0d0d1a;
+  --surface:  #151528;
+  --card:     #1e1e38;
+  --accent:   #6c63ff;
+  --accent2:  #ff6584;
+  --text:     #e0e0ff;
+  --muted:    #888aaa;
+  --ok:       #4ade80;
+  --warn:     #facc15;
+  --danger:   #f87171;
+  --radius:   14px;
+}
+* { margin:0; padding:0; box-sizing:border-box }
+body {
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+}
+h1 { font-size:1.6em; color: var(--accent); letter-spacing:1px }
+.sub { color: var(--muted); font-size:.85em; margin-bottom:24px }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid rgba(108,99,255,.15);
+}
+.card-title {
+  font-size:.8em;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color: var(--muted);
+  margin-bottom:14px;
+}
+
+/* Status row */
+.status-row { display:flex; align-items:center; gap:10px; margin-bottom:14px }
+.dot { width:10px; height:10px; border-radius:50%; background:var(--muted); flex-shrink:0 }
+.dot.ok   { background:var(--ok);    box-shadow:0 0 6px var(--ok) }
+.dot.warn { background:var(--warn);  box-shadow:0 0 6px var(--warn) }
+.dot.err  { background:var(--danger);box-shadow:0 0 6px var(--danger) }
+
+/* D-pad */
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  grid-template-rows: repeat(3, 70px);
+  gap: 8px;
+  justify-content:center;
+}
+.dpad-btn {
+  background: var(--surface);
+  border: 1px solid rgba(108,99,255,.3);
+  color: var(--text);
+  border-radius: 10px;
+  font-size: 1.4em;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  display:flex; align-items:center; justify-content:center;
+}
+.dpad-btn:hover { background: var(--accent); transform:scale(1.05) }
+.dpad-btn:active { transform:scale(.97) }
+.dpad-btn.empty { pointer-events:none; background:transparent; border:none }
+
+/* Action buttons */
+.actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px }
+.act-btn {
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  font-size:.95em;
+  font-weight:600;
+  cursor:pointer;
+  transition:opacity .15s, transform .1s;
+}
+.act-btn:hover { opacity:.85; transform:scale(1.02) }
+.act-btn:active { transform:scale(.97) }
+.btn-dance  { background:linear-gradient(135deg,#a855f7,#6c63ff); color:#fff }
+.btn-hi     { background:linear-gradient(135deg,#f59e0b,#ef4444); color:#fff }
+.btn-stop   { background:var(--danger); color:#fff; grid-column:1/-1; font-size:1em }
+
+/* Sliders */
+.slider-row { display:flex; align-items:center; gap:10px; margin-top:12px }
+.slider-row label { font-size:.8em; color:var(--muted); min-width:70px }
+input[type=range] {
+  flex:1; accent-color: var(--accent);
+  height:6px; cursor:pointer;
+}
+.val-badge {
+  font-size:.8em; color:var(--accent); min-width:38px; text-align:right; font-weight:700
+}
+
+/* Sensor bars */
+.sensor-grid { display:grid; gap:10px }
+.s-row { display:flex; justify-content:space-between; align-items:center }
+.s-label { font-size:.85em; color:var(--muted) }
+.s-value { font-size:1em; font-weight:700; font-variant-numeric:tabular-nums }
+.s-bar-bg { height:6px; background:#2a2a44; border-radius:3px; margin-top:4px }
+.s-bar    { height:6px; border-radius:3px; transition:width .3s }
+.bar-front { background:var(--accent) }
+.bar-back  { background:var(--accent2) }
+.bar-adc   { background:var(--ok) }
+
+/* Log */
+.log-box {
+  background: var(--surface);
+  border-radius:8px;
+  height:160px;
+  overflow-y:auto;
+  padding:10px;
+  font-family:monospace;
+  font-size:.78em;
+  color:var(--muted);
+}
+.log-box .ok-line  { color:var(--ok) }
+.log-box .err-line { color:var(--danger) }
+.log-box .info-line{ color:var(--accent) }
+
+/* Nav */
+nav { display:flex; gap:14px; margin-bottom:20px; align-items:center }
+nav a {
+  color:var(--muted); text-decoration:none; font-size:.85em; font-weight:600;
+  padding:6px 14px; border-radius:20px; border:1px solid transparent;
+  transition:all .2s;
+}
+nav a:hover, nav a.active {
+  color:var(--accent); border-color:var(--accent);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span style="color:var(--accent);font-weight:800;font-size:1.1em">🤖 LUMIO V2</span>
+  <a href="/" class="active">Control</a>
+  <a href="/gpio">GPIO Config</a>
+</nav>
+
+<div class="status-row">
+  <div class="dot" id="conn-dot"></div>
+  <span id="conn-text" style="font-size:.85em;color:var(--muted)">Connecting…</span>
+</div>
+
+<div class="grid">
+
+  <!-- Movement -->
+  <div class="card">
+    <div class="card-title">Movement</div>
+    <div class="dpad">
+      <div class="dpad-btn empty"></div>
+      <button class="dpad-btn" id="btn-fwd"  title="Forward">▲</button>
+      <div class="dpad-btn empty"></div>
+      <button class="dpad-btn" id="btn-left" title="Turn Left">◄</button>
+      <div class="dpad-btn empty"></div>
+      <button class="dpad-btn" id="btn-right"title="Turn Right">►</button>
+      <div class="dpad-btn empty"></div>
+      <button class="dpad-btn" id="btn-back" title="Backward">▼</button>
+      <div class="dpad-btn empty"></div>
+    </div>
+
+    <div class="slider-row">
+      <label>Distance / Angle</label>
+      <input type="range" id="sl-value" min="0.1" max="3" step="0.1" value="1">
+      <span class="val-badge" id="sl-value-lbl">1.0</span>
+    </div>
+    <div class="slider-row">
+      <label>Speed %</label>
+      <input type="range" id="sl-duty" min="20" max="100" step="5" value="50">
+      <span class="val-badge" id="sl-duty-lbl">50</span>
+    </div>
+
+    <div class="actions">
+      <button class="act-btn btn-dance" id="btn-dance">💃 Dance</button>
+      <button class="act-btn btn-hi"    id="btn-hi">👋 Hi!</button>
+      <button class="act-btn btn-stop"  id="btn-stop">⛔ EMERGENCY STOP</button>
+    </div>
+  </div>
+
+  <!-- Sensors -->
+  <div class="card">
+    <div class="card-title">Live Sensors</div>
+    <div class="sensor-grid">
+      <div>
+        <div class="s-row">
+          <span class="s-label">Front Ultrasonic</span>
+          <span class="s-value" id="sv-front">—</span>
+        </div>
+        <div class="s-bar-bg"><div class="s-bar bar-front" id="sb-front" style="width:0%"></div></div>
+      </div>
+      <div>
+        <div class="s-row">
+          <span class="s-label">Back Ultrasonic</span>
+          <span class="s-value" id="sv-back">—</span>
+        </div>
+        <div class="s-bar-bg"><div class="s-bar bar-back" id="sb-back" style="width:0%"></div></div>
+      </div>
+      <hr style="border-color:#2a2a44">
+      <div id="adc-readings">
+        <!-- filled by JS -->
+      </div>
+    </div>
+    <button onclick="pollSensors()" style="
+      margin-top:14px; width:100%; padding:8px;
+      background:transparent; border:1px solid var(--accent);
+      color:var(--accent); border-radius:8px; cursor:pointer; font-size:.85em
+    ">↻ Refresh</button>
+  </div>
+
+  <!-- Log -->
+  <div class="card" style="grid-column:1/-1">
+    <div class="card-title">Event Log</div>
+    <div class="log-box" id="log-box"></div>
+  </div>
+
+</div>
+
+<script>
+const socket = io();
+let autoRefresh = null;
+
+// ── Connection status ───────────────────────────────────────────────────────
+
+socket.on('connect', () => {
+  setConn(true);
+  pollSensors();
+  autoRefresh = setInterval(pollSensors, 2000);
+});
+socket.on('disconnect', () => {
+  setConn(false);
+  clearInterval(autoRefresh);
+});
+
+function setConn(ok) {
+  document.getElementById('conn-dot').className  = 'dot ' + (ok ? 'ok' : 'err');
+  document.getElementById('conn-text').textContent = ok ? 'Connected to Lumio' : 'Disconnected';
+}
+
+// ── Logging ─────────────────────────────────────────────────────────────────
+
+function appendLog(msg, cls='info-line') {
+  const box  = document.getElementById('log-box');
+  const line = document.createElement('div');
+  line.className = cls;
+  line.textContent = new Date().toLocaleTimeString() + '  ' + msg;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+}
+
+// ── Command helpers ──────────────────────────────────────────────────────────
+
+function cmd(type, valueSrc='dist') {
+  const value = parseFloat(document.getElementById('sl-value').value);
+  const duty  = parseInt(document.getElementById('sl-duty').value);
+  socket.emit('command', { type, value, duty });
+  appendLog(`→ ${type}  val=${value}  duty=${duty}%`);
+}
+
+socket.on('command_result', d => {
+  appendLog(`← ${d.cmd}  ${d.ok ? 'OK' : 'FAILED/OBSTACLE'}`, d.ok ? 'ok-line' : 'err-line');
+});
+
+// D-pad buttons
+document.getElementById('btn-fwd').onclick   = () => cmd('forward');
+document.getElementById('btn-back').onclick  = () => cmd('backward');
+document.getElementById('btn-left').onclick  = () => cmd('left');
+document.getElementById('btn-right').onclick = () => cmd('right');
+document.getElementById('btn-dance').onclick = () => { socket.emit('command',{type:'dance',value:1,duty:50}); appendLog('→ dance'); };
+document.getElementById('btn-hi').onclick    = () => { socket.emit('command',{type:'hi',value:1,duty:50});    appendLog('→ hi'); };
+document.getElementById('btn-stop').onclick  = () => { socket.emit('command',{type:'stop',value:0,duty:0});   appendLog('→ STOP', 'err-line'); };
+
+// Sliders
+document.getElementById('sl-value').oninput = e =>
+  document.getElementById('sl-value-lbl').textContent = parseFloat(e.target.value).toFixed(1);
+document.getElementById('sl-duty').oninput = e =>
+  document.getElementById('sl-duty-lbl').textContent = e.target.value;
+
+// ── Sensor polling ───────────────────────────────────────────────────────────
+
+function pollSensors() {
+  socket.emit('get_sensor', {type:'front'});
+  socket.emit('get_sensor', {type:'back'});
+  for(let ch=0;ch<8;ch++) socket.emit('get_sensor', {type:'adc', ch});
+}
+
+socket.on('sensor_data', d => {
+  if (d.type === 'front') updateUS('front', d.cm);
+  if (d.type === 'back')  updateUS('back',  d.cm);
+  if (d.type === 'adc')   updateADC(d);
+});
+
+function updateUS(side, cm) {
+  const el  = document.getElementById(`sv-${side}`);
+  const bar = document.getElementById(`sb-${side}`);
+  if (cm == null) return;
+  el.textContent = cm >= 999 ? '—' : cm.toFixed(1) + ' cm';
+  const pct = Math.min(100, (cm / 200) * 100);
+  bar.style.width = pct + '%';
+  el.style.color = cm < 20 ? 'var(--danger)' : cm < 50 ? 'var(--warn)' : 'var(--ok)';
+}
+
+const _adcRows = {};
+function updateADC(d) {
+  const ch  = d.ch;
+  const box = document.getElementById('adc-readings');
+  if (!_adcRows[ch]) {
+    const row = document.createElement('div');
+    row.innerHTML = `
+      <div class="s-row">
+        <span class="s-label">ADC ch${ch}</span>
+        <span class="s-value" id="av-${ch}">—</span>
+      </div>
+      <div class="s-bar-bg"><div class="s-bar bar-adc" id="ab-${ch}" style="width:0%"></div></div>`;
+    box.appendChild(row);
+    _adcRows[ch] = true;
+  }
+  const v = d.voltage;
+  document.getElementById(`av-${ch}`).textContent = v != null ? v.toFixed(3) + ' V' : '—';
+  const pct = Math.min(100, (v / 3.3) * 100);
+  document.getElementById(`ab-${ch}`).style.width = pct + '%';
+}
+
+// ── RP2040 events ────────────────────────────────────────────────────────────
+
+socket.on('rp2040_event', d => {
+  appendLog(`RP2040 event: ${JSON.stringify(d)}`, 'info-line');
+});
+</script>
+</body>
+</html>
