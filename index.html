@@ -1,583 +1,954 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lumio V2 – Codebase Documentation</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lumio V2 – Codebase Documentation</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap");
 
-  :root {
-    --bg: #0a0c10;
-    --bg2: #10131a;
-    --bg3: #161b26;
-    --border: #1e2635;
-    --accent: #3b82f6;
-    --accent2: #06b6d4;
-    --accent3: #f59e0b;
-    --danger: #ef4444;
-    --warn: #f97316;
-    --ok: #22c55e;
-    --text: #e2e8f0;
-    --text2: #94a3b8;
-    --text3: #64748b;
-    --code-bg: #0d1117;
-  }
+            :root {
+                --bg: #0a0c10;
+                --bg2: #10131a;
+                --bg3: #161b26;
+                --border: #1e2635;
+                --accent: #3b82f6;
+                --accent2: #06b6d4;
+                --accent3: #f59e0b;
+                --danger: #ef4444;
+                --warn: #f97316;
+                --ok: #22c55e;
+                --text: #e2e8f0;
+                --text2: #94a3b8;
+                --text3: #64748b;
+                --code-bg: #0d1117;
+            }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-  html { scroll-behavior: smooth; }
+            html {
+                scroll-behavior: smooth;
+            }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-  }
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: "DM Sans", sans-serif;
+                font-size: 15px;
+                line-height: 1.7;
+            }
 
-  /* ── Sidebar ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0;
-    width: 260px; height: 100vh;
-    background: var(--bg2);
-    border-right: 1px solid var(--border);
-    overflow-y: auto;
-    z-index: 100;
-    padding: 24px 0;
-  }
+            /* ── Sidebar ── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 260px;
+                height: 100vh;
+                background: var(--bg2);
+                border-right: 1px solid var(--border);
+                overflow-y: auto;
+                z-index: 100;
+                padding: 24px 0;
+            }
 
-  .nav-logo {
-    padding: 0 20px 20px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 16px;
-  }
-  .nav-logo .title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.1em;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
-  .nav-logo .sub {
-    font-size: 0.75em;
-    color: var(--text3);
-    margin-top: 2px;
-  }
+            .nav-logo {
+                padding: 0 20px 20px;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 16px;
+            }
+            .nav-logo .title {
+                font-family: "Syne", sans-serif;
+                font-weight: 800;
+                font-size: 1.1em;
+                color: var(--accent);
+                letter-spacing: -0.02em;
+            }
+            .nav-logo .sub {
+                font-size: 0.75em;
+                color: var(--text3);
+                margin-top: 2px;
+            }
 
-  nav a {
-    display: block;
-    padding: 6px 20px;
-    color: var(--text2);
-    text-decoration: none;
-    font-size: 0.82em;
-    font-family: 'DM Sans', sans-serif;
-    transition: color 0.15s, background 0.15s;
-    border-radius: 0;
-  }
-  nav a:hover { color: var(--text); background: var(--bg3); }
-  nav .nav-section {
-    padding: 14px 20px 4px;
-    font-size: 0.68em;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text3);
-  }
-  nav a.active { color: var(--accent); border-left: 2px solid var(--accent); padding-left: 18px; }
+            nav a {
+                display: block;
+                padding: 6px 20px;
+                color: var(--text2);
+                text-decoration: none;
+                font-size: 0.82em;
+                font-family: "DM Sans", sans-serif;
+                transition:
+                    color 0.15s,
+                    background 0.15s;
+                border-radius: 0;
+            }
+            nav a:hover {
+                color: var(--text);
+                background: var(--bg3);
+            }
+            nav .nav-section {
+                padding: 14px 20px 4px;
+                font-size: 0.68em;
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text3);
+            }
+            nav a.active {
+                color: var(--accent);
+                border-left: 2px solid var(--accent);
+                padding-left: 18px;
+            }
 
-  /* ── Main content ── */
-  main {
-    margin-left: 260px;
-    padding: 48px 56px;
-    max-width: 1000px;
-  }
+            /* ── Main content ── */
+            main {
+                margin-left: 260px;
+                padding: 48px 56px;
+                max-width: 1000px;
+            }
 
-  /* ── Sections ── */
-  section { margin-bottom: 56px; }
+            /* ── Sections ── */
+            section {
+                margin-bottom: 56px;
+            }
 
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.2em;
-    color: var(--text);
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
-  }
-  h1 span { color: var(--accent); }
+            h1 {
+                font-family: "Syne", sans-serif;
+                font-weight: 800;
+                font-size: 2.2em;
+                color: var(--text);
+                letter-spacing: -0.03em;
+                margin-bottom: 8px;
+            }
+            h1 span {
+                color: var(--accent);
+            }
 
-  h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.35em;
-    color: var(--text);
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
+            h2 {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 1.35em;
+                color: var(--text);
+                letter-spacing: -0.02em;
+                margin-bottom: 16px;
+                margin-top: 8px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid var(--border);
+            }
 
-  h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 1em;
-    color: var(--accent2);
-    margin: 20px 0 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-size: 0.78em;
-  }
+            h3 {
+                font-family: "Syne", sans-serif;
+                font-weight: 600;
+                font-size: 1em;
+                color: var(--accent2);
+                margin: 20px 0 8px;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                font-size: 0.78em;
+            }
 
-  p { color: var(--text2); margin-bottom: 12px; }
+            p {
+                color: var(--text2);
+                margin-bottom: 12px;
+            }
 
-  a { color: var(--accent); }
+            a {
+                color: var(--accent);
+            }
 
-  /* ── Hero banner ── */
-  .hero {
-    background: linear-gradient(135deg, #0f1928 0%, #0a1520 50%, #06101c 100%);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 40px;
-    margin-bottom: 48px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero .version {
-    display: inline-block;
-    background: rgba(59,130,246,0.15);
-    color: var(--accent);
-    border: 1px solid rgba(59,130,246,0.3);
-    border-radius: 20px;
-    padding: 3px 12px;
-    font-size: 0.75em;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 14px;
-  }
-  .hero p { color: var(--text2); max-width: 600px; }
+            /* ── Hero banner ── */
+            .hero {
+                background: linear-gradient(
+                    135deg,
+                    #0f1928 0%,
+                    #0a1520 50%,
+                    #06101c 100%
+                );
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 40px;
+                margin-bottom: 48px;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: -60px;
+                right: -60px;
+                width: 220px;
+                height: 220px;
+                background: radial-gradient(
+                    circle,
+                    rgba(59, 130, 246, 0.12) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+            .hero .version {
+                display: inline-block;
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--accent);
+                border: 1px solid rgba(59, 130, 246, 0.3);
+                border-radius: 20px;
+                padding: 3px 12px;
+                font-size: 0.75em;
+                font-family: "JetBrains Mono", monospace;
+                margin-bottom: 14px;
+            }
+            .hero p {
+                color: var(--text2);
+                max-width: 600px;
+            }
 
-  /* ── Code blocks ── */
-  pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    overflow-x: auto;
-    margin: 12px 0 20px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82em;
-    line-height: 1.6;
-  }
-  code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85em;
-    background: var(--bg3);
-    padding: 2px 6px;
-    border-radius: 4px;
-    color: var(--accent2);
-  }
-  pre code {
-    background: none;
-    padding: 0;
-    font-size: inherit;
-    color: #c9d1d9;
-  }
-  .kw { color: #ff7b72; }
-  .str { color: #a5d6ff; }
-  .cm { color: #6e7681; font-style: italic; }
-  .fn { color: #d2a8ff; }
-  .num { color: #f2cc60; }
+            /* ── Code blocks ── */
+            pre {
+                background: var(--code-bg);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                padding: 20px;
+                overflow-x: auto;
+                margin: 12px 0 20px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.82em;
+                line-height: 1.6;
+            }
+            code {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.85em;
+                background: var(--bg3);
+                padding: 2px 6px;
+                border-radius: 4px;
+                color: var(--accent2);
+            }
+            pre code {
+                background: none;
+                padding: 0;
+                font-size: inherit;
+                color: #c9d1d9;
+            }
+            .kw {
+                color: #ff7b72;
+            }
+            .str {
+                color: #a5d6ff;
+            }
+            .cm {
+                color: #6e7681;
+                font-style: italic;
+            }
+            .fn {
+                color: #d2a8ff;
+            }
+            .num {
+                color: #f2cc60;
+            }
 
-  /* ── Bug / warning cards ── */
-  .bug-card {
-    background: rgba(239,68,68,0.07);
-    border: 1px solid rgba(239,68,68,0.25);
-    border-left: 3px solid var(--danger);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-  }
-  .warn-card {
-    background: rgba(249,115,22,0.07);
-    border: 1px solid rgba(249,115,22,0.25);
-    border-left: 3px solid var(--warn);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-  }
-  .ok-card {
-    background: rgba(34,197,94,0.07);
-    border: 1px solid rgba(34,197,94,0.2);
-    border-left: 3px solid var(--ok);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-  }
-  .info-card {
-    background: rgba(59,130,246,0.07);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 16px;
-  }
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.88em;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .bug-card .card-title { color: var(--danger); }
-  .warn-card .card-title { color: var(--warn); }
-  .ok-card .card-title { color: var(--ok); }
-  .info-card .card-title { color: var(--accent); }
-  .card-body { color: var(--text2); font-size: 0.88em; line-height: 1.6; }
-  .card-body code { font-size: 0.9em; }
+            /* ── Bug / warning cards ── */
+            .bug-card {
+                background: rgba(239, 68, 68, 0.07);
+                border: 1px solid rgba(239, 68, 68, 0.25);
+                border-left: 3px solid var(--danger);
+                border-radius: 8px;
+                padding: 16px 20px;
+                margin-bottom: 16px;
+            }
+            .warn-card {
+                background: rgba(249, 115, 22, 0.07);
+                border: 1px solid rgba(249, 115, 22, 0.25);
+                border-left: 3px solid var(--warn);
+                border-radius: 8px;
+                padding: 16px 20px;
+                margin-bottom: 16px;
+            }
+            .ok-card {
+                background: rgba(34, 197, 94, 0.07);
+                border: 1px solid rgba(34, 197, 94, 0.2);
+                border-left: 3px solid var(--ok);
+                border-radius: 8px;
+                padding: 16px 20px;
+                margin-bottom: 16px;
+            }
+            .info-card {
+                background: rgba(59, 130, 246, 0.07);
+                border: 1px solid rgba(59, 130, 246, 0.2);
+                border-left: 3px solid var(--accent);
+                border-radius: 8px;
+                padding: 16px 20px;
+                margin-bottom: 16px;
+            }
+            .card-title {
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                font-size: 0.88em;
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .bug-card .card-title {
+                color: var(--danger);
+            }
+            .warn-card .card-title {
+                color: var(--warn);
+            }
+            .ok-card .card-title {
+                color: var(--ok);
+            }
+            .info-card .card-title {
+                color: var(--accent);
+            }
+            .card-body {
+                color: var(--text2);
+                font-size: 0.88em;
+                line-height: 1.6;
+            }
+            .card-body code {
+                font-size: 0.9em;
+            }
 
-  /* ── Tables ── */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0 20px;
-    font-size: 0.85em;
-  }
-  th {
-    text-align: left;
-    padding: 10px 14px;
-    background: var(--bg3);
-    color: var(--text2);
-    font-family: 'Syne', sans-serif;
-    font-weight: 600;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--border);
-  }
-  td {
-    padding: 9px 14px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text2);
-    vertical-align: top;
-  }
-  td code { font-size: 0.88em; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
+            /* ── Tables ── */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 12px 0 20px;
+                font-size: 0.85em;
+            }
+            th {
+                text-align: left;
+                padding: 10px 14px;
+                background: var(--bg3);
+                color: var(--text2);
+                font-family: "Syne", sans-serif;
+                font-weight: 600;
+                font-size: 0.8em;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                border-bottom: 1px solid var(--border);
+            }
+            td {
+                padding: 9px 14px;
+                border-bottom: 1px solid var(--border);
+                color: var(--text2);
+                vertical-align: top;
+            }
+            td code {
+                font-size: 0.88em;
+            }
+            tr:hover td {
+                background: rgba(255, 255, 255, 0.02);
+            }
 
-  /* ── Architecture diagram ── */
-  .arch {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px;
-    margin: 16px 0 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8em;
-    line-height: 1.9;
-    color: var(--text2);
-  }
-  .arch .highlight { color: var(--accent2); }
-  .arch .dim { color: var(--text3); }
-  .arch .arrow { color: var(--accent3); }
+            /* ── Architecture diagram ── */
+            .arch {
+                background: var(--bg2);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 28px;
+                margin: 16px 0 24px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.8em;
+                line-height: 1.9;
+                color: var(--text2);
+            }
+            .arch .highlight {
+                color: var(--accent2);
+            }
+            .arch .dim {
+                color: var(--text3);
+            }
+            .arch .arrow {
+                color: var(--accent3);
+            }
 
-  /* ── Module cards ── */
-  .module-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin: 16px 0 24px;
-  }
-  .module-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    transition: border-color 0.2s;
-  }
-  .module-card:hover { border-color: var(--accent); }
-  .module-card .filename {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82em;
-    color: var(--accent2);
-    margin-bottom: 6px;
-  }
-  .module-card .desc {
-    font-size: 0.84em;
-    color: var(--text2);
-    line-height: 1.5;
-  }
+            /* ── Module cards ── */
+            .module-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+                margin: 16px 0 24px;
+            }
+            .module-card {
+                background: var(--bg2);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 18px 20px;
+                transition: border-color 0.2s;
+            }
+            .module-card:hover {
+                border-color: var(--accent);
+            }
+            .module-card .filename {
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.82em;
+                color: var(--accent2);
+                margin-bottom: 6px;
+            }
+            .module-card .desc {
+                font-size: 0.84em;
+                color: var(--text2);
+                line-height: 1.5;
+            }
 
-  /* ── Protocol flow ── */
-  .flow {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin: 12px 0;
-    flex-wrap: wrap;
-  }
-  .flow-node {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 14px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78em;
-    color: var(--text);
-  }
-  .flow-arrow {
-    padding: 0 8px;
-    color: var(--accent3);
-    font-size: 0.9em;
-  }
+            /* ── Protocol flow ── */
+            .flow {
+                display: flex;
+                align-items: center;
+                gap: 0;
+                margin: 12px 0;
+                flex-wrap: wrap;
+            }
+            .flow-node {
+                background: var(--bg3);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 8px 14px;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.78em;
+                color: var(--text);
+            }
+            .flow-arrow {
+                padding: 0 8px;
+                color: var(--accent3);
+                font-size: 0.9em;
+            }
 
-  /* ── Badge ── */
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.72em;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    margin-left: 6px;
-    vertical-align: middle;
-  }
-  .badge-danger { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
-  .badge-warn   { background: rgba(249,115,22,0.15); color: var(--warn); border: 1px solid rgba(249,115,22,0.3); }
-  .badge-ok     { background: rgba(34,197,94,0.15); color: var(--ok); border: 1px solid rgba(34,197,94,0.3); }
-  .badge-info   { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid rgba(59,130,246,0.3); }
+            /* ── Badge ── */
+            .badge {
+                display: inline-block;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.72em;
+                font-family: "Syne", sans-serif;
+                font-weight: 700;
+                margin-left: 6px;
+                vertical-align: middle;
+            }
+            .badge-danger {
+                background: rgba(239, 68, 68, 0.15);
+                color: var(--danger);
+                border: 1px solid rgba(239, 68, 68, 0.3);
+            }
+            .badge-warn {
+                background: rgba(249, 115, 22, 0.15);
+                color: var(--warn);
+                border: 1px solid rgba(249, 115, 22, 0.3);
+            }
+            .badge-ok {
+                background: rgba(34, 197, 94, 0.15);
+                color: var(--ok);
+                border: 1px solid rgba(34, 197, 94, 0.3);
+            }
+            .badge-info {
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--accent);
+                border: 1px solid rgba(59, 130, 246, 0.3);
+            }
 
-  /* ── Divider ── */
-  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+            /* ── Divider ── */
+            hr {
+                border: none;
+                border-top: 1px solid var(--border);
+                margin: 32px 0;
+            }
 
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+            /* ── Scrollbar ── */
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--bg);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--border);
+                border-radius: 3px;
+            }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    nav { display: none; }
-    main { margin-left: 0; padding: 32px 24px; }
-    .module-grid { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
+            /* ── Responsive ── */
+            @media (max-width: 900px) {
+                nav {
+                    display: none;
+                }
+                main {
+                    margin-left: 0;
+                    padding: 32px 24px;
+                }
+                .module-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-logo">
+                <div class="title">🤖 Lumio V2</div>
+                <div class="sub">Codebase Documentation</div>
+            </div>
+            <div class="nav-section">Overview</div>
+            <a href="#overview">System Overview</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#modules">Module Map</a>
 
-<nav>
-  <div class="nav-logo">
-    <div class="title">🤖 Lumio V2</div>
-    <div class="sub">Codebase Documentation</div>
-  </div>
-  <div class="nav-section">Overview</div>
-  <a href="#overview">System Overview</a>
-  <a href="#architecture">Architecture</a>
-  <a href="#modules">Module Map</a>
+            <div class="nav-section">Pi-Side Software</div>
+            <a href="#main">main.py</a>
+            <a href="#config">config.py</a>
+            <a href="#robot">robot.py</a>
+            <a href="#adc">adc.py</a>
+            <a href="#coprocessor">coprocessor.py</a>
+            <a href="#web">web.py</a>
+            <a href="#wifi">wifi_provision.py</a>
 
-  <div class="nav-section">Pi-Side Software</div>
-  <a href="#main">main.py</a>
-  <a href="#config">config.py</a>
-  <a href="#robot">robot.py</a>
-  <a href="#adc">adc.py</a>
-  <a href="#coprocessor">coprocessor.py</a>
-  <a href="#web">web.py</a>
-  <a href="#wifi">wifi_provision.py</a>
+            <div class="nav-section">RP2040 Firmware</div>
+            <a href="#fw-main">main.py (RP2040)</a>
+            <a href="#fw-protocol">protocol.py</a>
+            <a href="#fw-pinmgr">pin_manager.py</a>
+            <a href="#fw-protocol-ref">Protocol Reference</a>
 
-  <div class="nav-section">RP2040 Firmware</div>
-  <a href="#fw-main">main.py (RP2040)</a>
-  <a href="#fw-protocol">protocol.py</a>
-  <a href="#fw-pinmgr">pin_manager.py</a>
-  <a href="#fw-protocol-ref">Protocol Reference</a>
+            <div class="nav-section">Changelog</div>
+            <a href="#bugs">✓ Resolved Issues</a>
+        </nav>
 
-  <div class="nav-section">Changelog</div>
-  <a href="#bugs">✓ Resolved Issues</a>
+        <main>
+            <!-- HERO -->
+            <div class="hero">
+                <div class="version">v2.0.0</div>
+                <h1><span>Lumio V2</span> Codebase Documentation</h1>
+                <p>
+                    Full technical reference for the Lumio V2 educational
+                    classroom robot — covering both the Raspberry Pi 5 software
+                    stack and the RP2040 co-processor firmware. Includes a bugs
+                    report with fixes.
+                </p>
+            </div>
 
-  <div class="nav-section">Tooling</div>
-  <a href="#tooling">Docs Tooling Guide</a>
-</nav>
+            <!-- OVERVIEW -->
+            <section id="overview">
+                <h2>System Overview</h2>
+                <p>
+                    Lumio V2 is a two-processor robot: a
+                    <strong>Raspberry Pi 5</strong> runs the high-level software
+                    (web UI, WiFi, motor control, ADC), and an
+                    <strong>RP2040</strong> acts as a GPIO co-processor,
+                    expanding the available I/O with runtime-configurable pins,
+                    PWM, and ADC channels over a UART JSON protocol.
+                </p>
+                <p>
+                    Think of it like a city with two governments: the Pi is the
+                    mayor (policy, communication, web services) and the RP2040
+                    is the public works department (raw GPIO muscle, sensor
+                    polling, hardware-level pin management). They communicate
+                    via a simple JSON postal system over UART.
+                </p>
+                <div class="arch">
+                    <span class="highlight"
+                        >┌───────────────────────────────────────────────────────────────────┐</span
+                    >
+                    <span class="highlight">│ RASPBERRY PI 5 (host) │</span>
+                    <span class="highlight">│ │</span>
+                    │ <span class="highlight">main.py</span> ──bootstrap──▶
+                    <span class="highlight">robot.py</span> (L298N, HC-SR04) │ │
+                    │ <span class="highlight">adc.py</span> (MCP3008 bit-bang
+                    SPI) │ │ │
+                    <span class="highlight">coprocessor.py</span> (UART→RP2040)
+                    │ │ │
+                    <span class="highlight">wifi_provision.py</span> (nmcli
+                    hotspot) │ │ └──────────▶
+                    <span class="highlight">web.py</span> (Flask + SocketIO) │
+                    <span class="highlight"
+                        >└───────────────────────────┬───────────────────────────────────────┘</span
+                    >
+                    <span class="arrow">│ UART 115200 8N1</span>
+                    <span class="arrow"
+                        >│ GP14(TX)↔GP1(RX) GP15(RX)↔GP2(TX)</span
+                    >
+                    <span class="highlight"
+                        >┌───────────────────────────▼───────────────────────────────────────┐</span
+                    >
+                    <span class="highlight"
+                        >│ RP2040 (co-processor / MicroPython) │</span
+                    >
+                    <span class="highlight">│ │</span>
+                    │ <span class="highlight">main.py</span> ──loop──▶
+                    <span class="highlight">protocol.py</span> (JSON parse /
+                    dispatch) │ │
+                    <span class="highlight">pin_manager.py</span> (GP3–GP29,
+                    ADC, PWM) │
+                    <span class="highlight"
+                        >└───────────────────────────────────────────────────────────────────┘</span
+                    >
+                </div>
+            </section>
 
-<main>
+            <!-- ARCHITECTURE -->
+            <section id="architecture">
+                <h2>Architecture</h2>
+                <p>
+                    The system has four hardware subsystems managed by separate
+                    software layers. This separation — like your RS-485
+                    master/slave pattern from the workshop server project —
+                    means each layer can be tested or replaced independently.
+                </p>
+                <table>
+                    <tr>
+                        <th>Subsystem</th>
+                        <th>Hardware</th>
+                        <th>Pi GPIO</th>
+                        <th>Software Owner</th>
+                    </tr>
+                    <tr>
+                        <td>Motor drive</td>
+                        <td>L298N H-bridge</td>
+                        <td>BCM 17,27,22 (A) / 18,23,12 (B)</td>
+                        <td><code>robot.py</code></td>
+                    </tr>
+                    <tr>
+                        <td>Obstacle sensing</td>
+                        <td>2× HC-SR04 ultrasonic</td>
+                        <td>BCM 5,6 (front) / 13,26 (back)</td>
+                        <td><code>robot.py</code></td>
+                    </tr>
+                    <tr>
+                        <td>Analog sensing</td>
+                        <td>MCP3008 10-bit ADC</td>
+                        <td>BCM 16,20,35,21 (bit-bang SPI)</td>
+                        <td><code>adc.py</code></td>
+                    </tr>
+                    <tr>
+                        <td>GPIO expansion</td>
+                        <td>RP2040 co-processor</td>
+                        <td>BCM 14,15 (UART ttyAMA0)</td>
+                        <td><code>coprocessor.py</code></td>
+                    </tr>
+                </table>
+                <p>
+                    The web layer (<code>web.py</code>) is a thin adapter: it
+                    translates WebSocket events from the browser into method
+                    calls on <code>RobotController</code>, <code>MCP3008</code>,
+                    and <code>RP2040</code> objects — similar to how your
+                    MQTT/Redis gateway translated upstream messages into RS-485
+                    bus commands.
+                </p>
+            </section>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="version">v2.0.0</div>
-    <h1><span>Lumio V2</span> Codebase Documentation</h1>
-    <p>Full technical reference for the Lumio V2 educational classroom robot — covering both the Raspberry Pi 5 software stack and the RP2040 co-processor firmware. Includes a bugs report with fixes.</p>
-  </div>
+            <!-- MODULE MAP -->
+            <section id="modules">
+                <h2>Module Map</h2>
+                <div class="module-grid">
+                    <div class="module-card">
+                        <div class="filename">lumio/main.py</div>
+                        <div class="desc">
+                            Entry point. Instantiates all hardware objects, runs
+                            WiFi provisioning, then launches the Flask/SocketIO
+                            server. Boot sequence is: hardware → WiFi → web.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/config.py</div>
+                        <div class="desc">
+                            Single source of truth for ALL pin numbers, motion
+                            parameters, and network constants. Edit only this
+                            file when rewiring.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/robot.py</div>
+                        <div class="desc">
+                            L298N motor driver and HC-SR04 ultrasonic sensor
+                            interface. Provides high-level movement primitives:
+                            <code>move_forward</code>, <code>turn</code>,
+                            <code>dance</code>, etc. Includes
+                            <code>_FakeGPIO</code> stub for dev machines.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/adc.py</div>
+                        <div class="desc">
+                            Bit-banged SPI driver for the MCP3008. Reads 8
+                            analog channels at 10-bit resolution. Returns raw
+                            codes (0–1023) or voltages (0.0–3.3 V).
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/coprocessor.py</div>
+                        <div class="desc">
+                            Non-blocking UART interface to the RP2040.
+                            Background thread reads unsolicited events;
+                            synchronous commands use request-reply with timeout.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/web.py</div>
+                        <div class="desc">
+                            Flask + Flask-SocketIO server. REST endpoint for
+                            status/GPIO config. WebSocket events for commands
+                            and sensor streaming.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio/wifi_provision.py</div>
+                        <div class="desc">
+                            Boot-time WiFi provisioning: checks for saved
+                            credentials, starts AP hotspot + captive portal if
+                            none found, saves new credentials to
+                            <code>/etc/lumio/wifi.conf</code> via nmcli.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio-rp2040/main.py</div>
+                        <div class="desc">
+                            RP2040 MicroPython entry point. UART read loop on
+                            GP1/GP2 at 115200 baud. Polls all input pins every
+                            20 ms for edge events.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio-rp2040/protocol.py</div>
+                        <div class="desc">
+                            JSON command dispatcher. Parses incoming frames,
+                            calls into <code>PinManager</code>, serialises
+                            replies. Also handles async event push to host.
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="filename">lumio-rp2040/pin_manager.py</div>
+                        <div class="desc">
+                            Runtime GPIO state machine. Each pin is a
+                            <code>PinState</code> object with mode, current
+                            machine object, and edge-detection state. Supports:
+                            input, output, ADC, PWM, unused.
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  <!-- OVERVIEW -->
-  <section id="overview">
-    <h2>System Overview</h2>
-    <p>Lumio V2 is a two-processor robot: a <strong>Raspberry Pi 5</strong> runs the high-level software (web UI, WiFi, motor control, ADC), and an <strong>RP2040</strong> acts as a GPIO co-processor, expanding the available I/O with runtime-configurable pins, PWM, and ADC channels over a UART JSON protocol.</p>
-    <p>Think of it like a city with two governments: the Pi is the mayor (policy, communication, web services) and the RP2040 is the public works department (raw GPIO muscle, sensor polling, hardware-level pin management). They communicate via a simple JSON postal system over UART.</p>
-    <div class="arch">
-<span class="highlight">┌───────────────────────────────────────────────────────────────────┐</span>
-<span class="highlight">│                      RASPBERRY PI 5 (host)                        │</span>
-<span class="highlight">│                                                                   │</span>
-│  <span class="highlight">main.py</span>  ──bootstrap──▶  <span class="highlight">robot.py</span>  (L298N, HC-SR04)            │
-│            │            <span class="highlight">adc.py</span>    (MCP3008 bit-bang SPI)          │
-│            │            <span class="highlight">coprocessor.py</span>  (UART→RP2040)             │
-│            │            <span class="highlight">wifi_provision.py</span>  (nmcli hotspot)          │
-│            └──────────▶ <span class="highlight">web.py</span>    (Flask + SocketIO)               │
-<span class="highlight">└───────────────────────────┬───────────────────────────────────────┘</span>
-                            <span class="arrow">│ UART  115200 8N1</span>
-                            <span class="arrow">│ GP14(TX)↔GP1(RX)  GP15(RX)↔GP2(TX)</span>
-<span class="highlight">┌───────────────────────────▼───────────────────────────────────────┐</span>
-<span class="highlight">│                      RP2040 (co-processor / MicroPython)          │</span>
-<span class="highlight">│                                                                   │</span>
-│  <span class="highlight">main.py</span>  ──loop──▶  <span class="highlight">protocol.py</span>  (JSON parse / dispatch)         │
-│                     <span class="highlight">pin_manager.py</span>  (GP3–GP29, ADC, PWM)         │
-<span class="highlight">└───────────────────────────────────────────────────────────────────┘</span>
-    </div>
-  </section>
+            <hr />
 
-  <!-- ARCHITECTURE -->
-  <section id="architecture">
-    <h2>Architecture</h2>
-    <p>The system has four hardware subsystems managed by separate software layers. This separation — like your RS-485 master/slave pattern from the workshop server project — means each layer can be tested or replaced independently.</p>
-    <table>
-      <tr><th>Subsystem</th><th>Hardware</th><th>Pi GPIO</th><th>Software Owner</th></tr>
-      <tr><td>Motor drive</td><td>L298N H-bridge</td><td>BCM 17,27,22 (A) / 18,23,12 (B)</td><td><code>robot.py</code></td></tr>
-      <tr><td>Obstacle sensing</td><td>2× HC-SR04 ultrasonic</td><td>BCM 5,6 (front) / 13,26 (back)</td><td><code>robot.py</code></td></tr>
-      <tr><td>Analog sensing</td><td>MCP3008 10-bit ADC</td><td>BCM 16,20,35,21 (bit-bang SPI)</td><td><code>adc.py</code></td></tr>
-      <tr><td>GPIO expansion</td><td>RP2040 co-processor</td><td>BCM 14,15 (UART ttyAMA0)</td><td><code>coprocessor.py</code></td></tr>
-    </table>
-    <p>The web layer (<code>web.py</code>) is a thin adapter: it translates WebSocket events from the browser into method calls on <code>RobotController</code>, <code>MCP3008</code>, and <code>RP2040</code> objects — similar to how your MQTT/Redis gateway translated upstream messages into RS-485 bus commands.</p>
-  </section>
+            <!-- PI-SIDE MODULES -->
 
-  <!-- MODULE MAP -->
-  <section id="modules">
-    <h2>Module Map</h2>
-    <div class="module-grid">
-      <div class="module-card">
-        <div class="filename">lumio/main.py</div>
-        <div class="desc">Entry point. Instantiates all hardware objects, runs WiFi provisioning, then launches the Flask/SocketIO server. Boot sequence is: hardware → WiFi → web.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/config.py</div>
-        <div class="desc">Single source of truth for ALL pin numbers, motion parameters, and network constants. Edit only this file when rewiring.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/robot.py</div>
-        <div class="desc">L298N motor driver and HC-SR04 ultrasonic sensor interface. Provides high-level movement primitives: <code>move_forward</code>, <code>turn</code>, <code>dance</code>, etc. Includes <code>_FakeGPIO</code> stub for dev machines.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/adc.py</div>
-        <div class="desc">Bit-banged SPI driver for the MCP3008. Reads 8 analog channels at 10-bit resolution. Returns raw codes (0–1023) or voltages (0.0–3.3 V).</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/coprocessor.py</div>
-        <div class="desc">Non-blocking UART interface to the RP2040. Background thread reads unsolicited events; synchronous commands use request-reply with timeout.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/web.py</div>
-        <div class="desc">Flask + Flask-SocketIO server. REST endpoint for status/GPIO config. WebSocket events for commands and sensor streaming.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio/wifi_provision.py</div>
-        <div class="desc">Boot-time WiFi provisioning: checks for saved credentials, starts AP hotspot + captive portal if none found, saves new credentials to <code>/etc/lumio/wifi.conf</code> via nmcli.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio-rp2040/main.py</div>
-        <div class="desc">RP2040 MicroPython entry point. UART read loop on GP1/GP2 at 115200 baud. Polls all input pins every 20 ms for edge events.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio-rp2040/protocol.py</div>
-        <div class="desc">JSON command dispatcher. Parses incoming frames, calls into <code>PinManager</code>, serialises replies. Also handles async event push to host.</div>
-      </div>
-      <div class="module-card">
-        <div class="filename">lumio-rp2040/pin_manager.py</div>
-        <div class="desc">Runtime GPIO state machine. Each pin is a <code>PinState</code> object with mode, current machine object, and edge-detection state. Supports: input, output, ADC, PWM, unused.</div>
-      </div>
-    </div>
-  </section>
+            <section id="main">
+                <h2>Pi — <code>main.py</code> · Entry Point</h2>
+                <p>
+                    Boots the platform in a strict sequence. All hardware
+                    objects are instantiated here and passed into the web server
+                    factory function — this is dependency injection, preventing
+                    any module from needing global singletons.
+                </p>
+                <h3>Boot Sequence</h3>
+                <div class="flow">
+                    <div class="flow-node">Logging setup</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">RobotController()</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">MCP3008()</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">RP2040()</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">ensure_wifi()</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">socketio.run()</div>
+                </div>
+                <h3>Key Behaviour</h3>
+                <p>
+                    If <code>rp.ping()</code> fails at boot, the system logs a
+                    warning and continues — the RP2040 is treated as optional
+                    hardware. Same for WiFi: missing network does not prevent
+                    the web server from starting.
+                </p>
+                <h3>Environment Variables</h3>
+                <table>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Default</th>
+                        <th>Effect</th>
+                    </tr>
+                    <tr>
+                        <td><code>LUMIO_PORT</code></td>
+                        <td>80</td>
+                        <td>HTTP port for the web server</td>
+                    </tr>
+                    <tr>
+                        <td><code>LUMIO_LOG</code></td>
+                        <td>/var/log/lumio/lumio.log</td>
+                        <td>Log file path</td>
+                    </tr>
+                </table>
+            </section>
 
-  <hr>
+            <section id="config">
+                <h2>Pi — <code>config.py</code> · Pin Definitions</h2>
+                <p>
+                    The single source of truth for all hardware constants.
+                    Changing a wire? Edit only this file. Every other module
+                    imports from here — making config like the one schematic
+                    everyone reads from, rather than hardcoded magic numbers
+                    scattered across files.
+                </p>
+                <h3>Pin Groups</h3>
+                <table>
+                    <tr>
+                        <th>Group</th>
+                        <th>Constants</th>
+                        <th>Notes</th>
+                    </tr>
+                    <tr>
+                        <td>Motor A (left)</td>
+                        <td><code>MOTOR_A_IN1=17, IN2=27, ENA=22</code></td>
+                        <td>ENA is hardware PWM on Pi 5</td>
+                    </tr>
+                    <tr>
+                        <td>Motor B (right)</td>
+                        <td><code>MOTOR_B_IN3=18, IN4=23, ENB=12</code></td>
+                        <td>ENB is hardware PWM on Pi 5</td>
+                    </tr>
+                    <tr>
+                        <td>Front US</td>
+                        <td><code>FRONT_TRIG=5, FRONT_ECHO=6</code></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Back US</td>
+                        <td><code>BACK_TRIG=13, BACK_ECHO=26</code></td>
+                        <td>Changed from old REAR_ECHO=19</td>
+                    </tr>
+                    <tr>
+                        <td>MCP3008</td>
+                        <td><code>CS=16, MOSI=20, MISO=35, CLK=21</code></td>
+                        <td>⚠ BCM 35 — see Issues</td>
+                    </tr>
+                    <tr>
+                        <td>RP2040 UART</td>
+                        <td><code>PORT=/dev/ttyAMA0, BAUD=115200</code></td>
+                        <td>BCM 14/15</td>
+                    </tr>
+                    <tr>
+                        <td>I2C</td>
+                        <td><code>SCL=3, SDA=2, BUS=1</code></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <h3>Motion Constants</h3>
+                <table>
+                    <tr>
+                        <th>Constant</th>
+                        <th>Value</th>
+                        <th>Used in</th>
+                    </tr>
+                    <tr>
+                        <td><code>LINEAR_SPEED_MPS</code></td>
+                        <td>0.7 m/s</td>
+                        <td><code>move_forward/backward</code> timing</td>
+                    </tr>
+                    <tr>
+                        <td><code>ROTATION_SPEED_DPS</code></td>
+                        <td>270 °/s</td>
+                        <td><code>turn()</code> timing</td>
+                    </tr>
+                    <tr>
+                        <td><code>OBSTACLE_THRESHOLD_CM</code></td>
+                        <td>20 cm</td>
+                        <td>Emergency stop trigger</td>
+                    </tr>
+                    <tr>
+                        <td><code>PWM_FREQUENCY_HZ</code></td>
+                        <td>200 Hz</td>
+                        <td>Motor enable PWM frequency</td>
+                    </tr>
+                </table>
+            </section>
 
-  <!-- PI-SIDE MODULES -->
+            <section id="robot">
+                <h2>Pi — <code>robot.py</code> · Motor + Sensor Control</h2>
+                <p>
+                    Controls the L298N H-bridge and both HC-SR04 ultrasonic
+                    sensors. The class is thread-safe: all movement methods
+                    acquire <code>self._lock</code>, so the web server can't
+                    issue two simultaneous movement commands and cause GPIO
+                    conflicts.
+                </p>
 
-  <section id="main">
-    <h2>Pi — <code>main.py</code> · Entry Point</h2>
-    <p>Boots the platform in a strict sequence. All hardware objects are instantiated here and passed into the web server factory function — this is dependency injection, preventing any module from needing global singletons.</p>
-    <h3>Boot Sequence</h3>
-    <div class="flow">
-      <div class="flow-node">Logging setup</div><div class="flow-arrow">→</div>
-      <div class="flow-node">RobotController()</div><div class="flow-arrow">→</div>
-      <div class="flow-node">MCP3008()</div><div class="flow-arrow">→</div>
-      <div class="flow-node">RP2040()</div><div class="flow-arrow">→</div>
-      <div class="flow-node">ensure_wifi()</div><div class="flow-arrow">→</div>
-      <div class="flow-node">socketio.run()</div>
-    </div>
-    <h3>Key Behaviour</h3>
-    <p>If <code>rp.ping()</code> fails at boot, the system logs a warning and continues — the RP2040 is treated as optional hardware. Same for WiFi: missing network does not prevent the web server from starting.</p>
-    <h3>Environment Variables</h3>
-    <table>
-      <tr><th>Variable</th><th>Default</th><th>Effect</th></tr>
-      <tr><td><code>LUMIO_PORT</code></td><td>80</td><td>HTTP port for the web server</td></tr>
-      <tr><td><code>LUMIO_LOG</code></td><td>/var/log/lumio/lumio.log</td><td>Log file path</td></tr>
-    </table>
-  </section>
+                <h3>Public API</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Signature</th>
+                        <th>Returns</th>
+                        <th>Notes</th>
+                    </tr>
+                    <tr>
+                        <td><code>move_forward</code></td>
+                        <td><code>(distance_m=1.0, duty=50)</code></td>
+                        <td>bool</td>
+                        <td>False = blocked by obstacle</td>
+                    </tr>
+                    <tr>
+                        <td><code>move_backward</code></td>
+                        <td><code>(distance_m=1.0, duty=50)</code></td>
+                        <td>bool</td>
+                        <td>False = blocked by obstacle</td>
+                    </tr>
+                    <tr>
+                        <td><code>turn</code></td>
+                        <td><code>(angle_deg, duty=50)</code></td>
+                        <td>bool</td>
+                        <td>+ve = CW (right), –ve = CCW (left)</td>
+                    </tr>
+                    <tr>
+                        <td><code>stop</code></td>
+                        <td><code>()</code></td>
+                        <td>None</td>
+                        <td>Immediate, no nudge</td>
+                    </tr>
+                    <tr>
+                        <td><code>emergency_stop</code></td>
+                        <td><code>(obstacle_front=True)</code></td>
+                        <td>None</td>
+                        <td>Stops + nudges away from obstacle</td>
+                    </tr>
+                    <tr>
+                        <td><code>dance</code></td>
+                        <td><code>()</code></td>
+                        <td>bool</td>
+                        <td>Pre-programmed routine</td>
+                    </tr>
+                    <tr>
+                        <td><code>say_hi</code></td>
+                        <td><code>()</code></td>
+                        <td>bool</td>
+                        <td>Pre-programmed wave</td>
+                    </tr>
+                    <tr>
+                        <td><code>cleanup</code></td>
+                        <td><code>()</code></td>
+                        <td>None</td>
+                        <td>Call on shutdown</td>
+                    </tr>
+                </table>
 
-  <section id="config">
-    <h2>Pi — <code>config.py</code> · Pin Definitions</h2>
-    <p>The single source of truth for all hardware constants. Changing a wire? Edit only this file. Every other module imports from here — making config like the one schematic everyone reads from, rather than hardcoded magic numbers scattered across files.</p>
-    <h3>Pin Groups</h3>
-    <table>
-      <tr><th>Group</th><th>Constants</th><th>Notes</th></tr>
-      <tr><td>Motor A (left)</td><td><code>MOTOR_A_IN1=17, IN2=27, ENA=22</code></td><td>ENA is hardware PWM on Pi 5</td></tr>
-      <tr><td>Motor B (right)</td><td><code>MOTOR_B_IN3=18, IN4=23, ENB=12</code></td><td>ENB is hardware PWM on Pi 5</td></tr>
-      <tr><td>Front US</td><td><code>FRONT_TRIG=5, FRONT_ECHO=6</code></td><td></td></tr>
-      <tr><td>Back US</td><td><code>BACK_TRIG=13, BACK_ECHO=26</code></td><td>Changed from old REAR_ECHO=19</td></tr>
-      <tr><td>MCP3008</td><td><code>CS=16, MOSI=20, MISO=35, CLK=21</code></td><td>⚠ BCM 35 — see Issues</td></tr>
-      <tr><td>RP2040 UART</td><td><code>PORT=/dev/ttyAMA0, BAUD=115200</code></td><td>BCM 14/15</td></tr>
-      <tr><td>I2C</td><td><code>SCL=3, SDA=2, BUS=1</code></td><td></td></tr>
-    </table>
-    <h3>Motion Constants</h3>
-    <table>
-      <tr><th>Constant</th><th>Value</th><th>Used in</th></tr>
-      <tr><td><code>LINEAR_SPEED_MPS</code></td><td>0.7 m/s</td><td><code>move_forward/backward</code> timing</td></tr>
-      <tr><td><code>ROTATION_SPEED_DPS</code></td><td>270 °/s</td><td><code>turn()</code> timing</td></tr>
-      <tr><td><code>OBSTACLE_THRESHOLD_CM</code></td><td>20 cm</td><td>Emergency stop trigger</td></tr>
-      <tr><td><code>PWM_FREQUENCY_HZ</code></td><td>200 Hz</td><td>Motor enable PWM frequency</td></tr>
-    </table>
-  </section>
+                <h3>Distance Measurement</h3>
+                <p>
+                    Uses the standard HC-SR04 timing method: 10 µs TRIG pulse,
+                    then measure ECHO pulse width. Distance = pulse_time × 17150
+                    cm/s (speed of sound / 2, rounded). Timeout of 100 ms per
+                    phase prevents lockup on missing sensors.
+                </p>
 
-  <section id="robot">
-    <h2>Pi — <code>robot.py</code> · Motor + Sensor Control</h2>
-    <p>Controls the L298N H-bridge and both HC-SR04 ultrasonic sensors. The class is thread-safe: all movement methods acquire <code>self._lock</code>, so the web server can't issue two simultaneous movement commands and cause GPIO conflicts.</p>
-
-    <h3>Public API</h3>
-    <table>
-      <tr><th>Method</th><th>Signature</th><th>Returns</th><th>Notes</th></tr>
-      <tr><td><code>move_forward</code></td><td><code>(distance_m=1.0, duty=50)</code></td><td>bool</td><td>False = blocked by obstacle</td></tr>
-      <tr><td><code>move_backward</code></td><td><code>(distance_m=1.0, duty=50)</code></td><td>bool</td><td>False = blocked by obstacle</td></tr>
-      <tr><td><code>turn</code></td><td><code>(angle_deg, duty=50)</code></td><td>bool</td><td>+ve = CW (right), –ve = CCW (left)</td></tr>
-      <tr><td><code>stop</code></td><td><code>()</code></td><td>None</td><td>Immediate, no nudge</td></tr>
-      <tr><td><code>emergency_stop</code></td><td><code>(obstacle_front=True)</code></td><td>None</td><td>Stops + nudges away from obstacle</td></tr>
-      <tr><td><code>dance</code></td><td><code>()</code></td><td>bool</td><td>Pre-programmed routine</td></tr>
-      <tr><td><code>say_hi</code></td><td><code>()</code></td><td>bool</td><td>Pre-programmed wave</td></tr>
-      <tr><td><code>cleanup</code></td><td><code>()</code></td><td>None</td><td>Call on shutdown</td></tr>
-    </table>
-
-    <h3>Distance Measurement</h3>
-    <p>Uses the standard HC-SR04 timing method: 10 µs TRIG pulse, then measure ECHO pulse width. Distance = pulse_time × 17150 cm/s (speed of sound / 2, rounded). Timeout of 100 ms per phase prevents lockup on missing sensors.</p>
-
-    <div class="ok-card">
-      <div class="card-title">✓ FIXED — t_start / t_end moved outside while-loop body</div>
-      <div class="card-body">
-        Both timestamps are now assigned <em>after</em> their respective loops exit, capturing the true echo edge time rather than the last-iteration timestamp. This eliminates the systematic distance offset that was proportional to loop overhead.
-        <pre><span class="cm"># Current (fixed) code</span>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIXED — t_start / t_end moved outside while-loop body
+                    </div>
+                    <div class="card-body">
+                        Both timestamps are now assigned <em>after</em> their
+                        respective loops exit, capturing the true echo edge time
+                        rather than the last-iteration timestamp. This
+                        eliminates the systematic distance offset that was
+                        proportional to loop overhead.
+                        <pre><span class="cm"># Current (fixed) code</span>
 <span class="kw">while</span> GPIO.input(echo_pin) == <span class="num">0</span>:
     <span class="kw">if</span> time.monotonic() > deadline: <span class="kw">return</span> <span class="num">999.0</span>
 t_start = time.monotonic()   <span class="cm"># set after loop exits — correct</span>
@@ -585,65 +956,178 @@ t_start = time.monotonic()   <span class="cm"># set after loop exits — correct
 <span class="kw">while</span> GPIO.input(echo_pin) == <span class="num">1</span>:
     <span class="kw">if</span> time.monotonic() > deadline: <span class="kw">return</span> <span class="num">999.0</span>
 t_end = time.monotonic()     <span class="cm"># set after loop exits — correct</span></pre>
-      </div>
-    </div>
+                    </div>
+                </div>
 
-    <h3>Simulation Mode</h3>
-    <p>If <code>RPi.GPIO</code> is not installed (dev machine, CI), the module falls back to <code>_FakeGPIO</code> — a minimal stub that silently no-ops all GPIO calls. This lets you run and test the web server without physical hardware.</p>
-  </section>
+                <h3>Simulation Mode</h3>
+                <p>
+                    If <code>RPi.GPIO</code> is not installed (dev machine, CI),
+                    the module falls back to <code>_FakeGPIO</code> — a minimal
+                    stub that silently no-ops all GPIO calls. This lets you run
+                    and test the web server without physical hardware.
+                </p>
+            </section>
 
-  <section id="adc">
-    <h2>Pi — <code>adc.py</code> · MCP3008 ADC Driver</h2>
-    <p>A pure bit-bang SPI driver — no kernel SPI device, no <code>spidev</code> used here. Think of it like I2C bit-banging you've seen in firmware, but for SPI: manually toggling CS, CLK, MOSI, and reading MISO pin-by-pin.</p>
-    <p>The MCP3008 protocol: send 5 bits (start + SGL/DIFF + D2..D0 channel select), then clock in 11 bits back (1 null + 10 data). The driver masks the result to 10 bits with <code>&amp; 0x3FF</code>.</p>
-    <h3>Public API</h3>
-    <table>
-      <tr><th>Method</th><th>Args</th><th>Returns</th></tr>
-      <tr><td><code>read_raw</code></td><td><code>channel: int (0-7)</code></td><td>int 0–1023</td></tr>
-      <tr><td><code>read_voltage</code></td><td><code>channel: int (0-7)</code></td><td>float 0.0–3.3 V</td></tr>
-      <tr><td><code>read_all_raw</code></td><td>—</td><td>dict {0..7: int}</td></tr>
-      <tr><td><code>read_all_voltage</code></td><td>—</td><td>dict {0..7: float}</td></tr>
-    </table>
-    <div class="warn-card">
-      <div class="card-title">⚠ WARNING — BCM GPIO 35 for MISO</div>
-      <div class="card-body"><code>ADC_MISO = 35</code> is set in <code>config.py</code>. BCM 35 exists on the Compute Module and Pi 5 40-pin header as physical pin 19 — but verify against your specific board variant. On a standard Pi 5, physical pin 19 is BCM 10 (SPI0 MISO). Confirm with <code>gpio readall</code> before first power-on to avoid a short.</div>
-    </div>
-  </section>
+            <section id="adc">
+                <h2>Pi — <code>adc.py</code> · MCP3008 ADC Driver</h2>
+                <p>
+                    A pure bit-bang SPI driver — no kernel SPI device, no
+                    <code>spidev</code> used here. Think of it like I2C
+                    bit-banging you've seen in firmware, but for SPI: manually
+                    toggling CS, CLK, MOSI, and reading MISO pin-by-pin.
+                </p>
+                <p>
+                    The MCP3008 protocol: send 5 bits (start + SGL/DIFF + D2..D0
+                    channel select), then clock in 11 bits back (1 null + 10
+                    data). The driver masks the result to 10 bits with
+                    <code>&amp; 0x3FF</code>.
+                </p>
+                <h3>Public API</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Args</th>
+                        <th>Returns</th>
+                    </tr>
+                    <tr>
+                        <td><code>read_raw</code></td>
+                        <td><code>channel: int (0-7)</code></td>
+                        <td>int 0–1023</td>
+                    </tr>
+                    <tr>
+                        <td><code>read_voltage</code></td>
+                        <td><code>channel: int (0-7)</code></td>
+                        <td>float 0.0–3.3 V</td>
+                    </tr>
+                    <tr>
+                        <td><code>read_all_raw</code></td>
+                        <td>—</td>
+                        <td>dict {0..7: int}</td>
+                    </tr>
+                    <tr>
+                        <td><code>read_all_voltage</code></td>
+                        <td>—</td>
+                        <td>dict {0..7: float}</td>
+                    </tr>
+                </table>
+                <div class="warn-card">
+                    <div class="card-title">
+                        ⚠ WARNING — BCM GPIO 35 for MISO
+                    </div>
+                    <div class="card-body">
+                        <code>ADC_MISO = 35</code> is set in
+                        <code>config.py</code>. BCM 35 exists on the Compute
+                        Module and Pi 5 40-pin header as physical pin 19 — but
+                        verify against your specific board variant. On a
+                        standard Pi 5, physical pin 19 is BCM 10 (SPI0 MISO).
+                        Confirm with <code>gpio readall</code> before first
+                        power-on to avoid a short.
+                    </div>
+                </div>
+            </section>
 
-  <section id="coprocessor">
-    <h2>Pi — <code>coprocessor.py</code> · RP2040 UART Interface</h2>
-    <p>A non-blocking serial interface. A background daemon thread reads continuously from <code>/dev/ttyAMA0</code> and splits on newlines — identical in concept to the background reader thread in your RS-485 MQTT gateway. Synchronous commands use a <code>threading.Event</code> as a one-shot signal: send, wait for event with timeout, return the last-received reply.</p>
-    <h3>Threading Model</h3>
-    <div class="flow">
-      <div class="flow-node">Web handler thread</div><div class="flow-arrow">→</div>
-      <div class="flow-node">send() acquires _lock</div><div class="flow-arrow">→</div>
-      <div class="flow-node">writes JSON to UART</div><div class="flow-arrow">→</div>
-      <div class="flow-node">waits on _reply_event</div>
-    </div>
-    <div class="flow" style="margin-top:6px;">
-      <div class="flow-node">_read_loop thread</div><div class="flow-arrow">→</div>
-      <div class="flow-node">parses reply frame</div><div class="flow-arrow">→</div>
-      <div class="flow-node">sets _reply_event</div><div class="flow-arrow">→</div>
-      <div class="flow-node">send() returns</div>
-    </div>
-    <h3>Public API</h3>
-    <table>
-      <tr><th>Method</th><th>Signature</th><th>Returns</th></tr>
-      <tr><td><code>ping</code></td><td><code>()</code></td><td>bool</td></tr>
-      <tr><td><code>gpio_set_mode</code></td><td><code>(pin: int, mode: str, label: str = "")</code></td><td>bool</td></tr>
-      <tr><td><code>gpio_write</code></td><td><code>(pin: int, value: int)</code></td><td>bool</td></tr>
-      <tr><td><code>gpio_read</code></td><td><code>(pin: int)</code></td><td>int | None</td></tr>
-      <tr><td><code>adc_read</code></td><td><code>(pin: int)</code> — GP26–GP29 only, must be in adc mode</td><td>float | None</td></tr>
-      <tr><td><code>on_event</code></td><td><code>(callback: Callable[[dict], None])</code></td><td>—</td></tr>
-      <tr><td><code>send</code></td><td><code>(payload: dict)</code></td><td>dict | None</td></tr>
-      <tr><td><code>close</code></td><td><code>()</code></td><td>—</td></tr>
-    </table>
-    <div class="ok-card">
-      <div class="card-title">✓ FIXED — adc_read now sends "pin" key; gpio_set_mode() added</div>
-      <div class="card-body">
-        <code>adc_read(pin)</code> now sends <code>{"cmd": "adc_read", "pin": pin}</code>, matching what the firmware's <code>frame.get("pin")</code> expects. The parameter was also renamed from <code>channel</code> to <code>pin</code> to reflect that GP26–GP29 are passed as pin numbers, not channel indices.<br><br>
-        <code>gpio_set_mode(pin, mode, label="")</code> was added as a new convenience wrapper — it was missing entirely but required by <code>web.py</code>'s GPIO config endpoint:
-        <pre><span class="kw">def</span> <span class="fn">gpio_set_mode</span>(self, pin: <span class="fn">int</span>, mode: <span class="fn">str</span>, label: <span class="fn">str</span> = <span class="str">""</span>) -> <span class="fn">bool</span>:
+            <section id="coprocessor">
+                <h2>
+                    Pi — <code>coprocessor.py</code> · RP2040 UART Interface
+                </h2>
+                <p>
+                    A non-blocking serial interface. A background daemon thread
+                    reads continuously from <code>/dev/ttyAMA0</code> and splits
+                    on newlines — identical in concept to the background reader
+                    thread in your RS-485 MQTT gateway. Synchronous commands use
+                    a <code>threading.Event</code> as a one-shot signal: send,
+                    wait for event with timeout, return the last-received reply.
+                </p>
+                <h3>Threading Model</h3>
+                <div class="flow">
+                    <div class="flow-node">Web handler thread</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">send() acquires _lock</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">writes JSON to UART</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">waits on _reply_event</div>
+                </div>
+                <div class="flow" style="margin-top: 6px">
+                    <div class="flow-node">_read_loop thread</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">parses reply frame</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">sets _reply_event</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">send() returns</div>
+                </div>
+                <h3>Public API</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Signature</th>
+                        <th>Returns</th>
+                    </tr>
+                    <tr>
+                        <td><code>ping</code></td>
+                        <td><code>()</code></td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>gpio_set_mode</code></td>
+                        <td>
+                            <code>(pin: int, mode: str, label: str = "")</code>
+                        </td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>gpio_write</code></td>
+                        <td><code>(pin: int, value: int)</code></td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>gpio_read</code></td>
+                        <td><code>(pin: int)</code></td>
+                        <td>int | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>adc_read</code></td>
+                        <td>
+                            <code>(pin: int)</code> — GP26–GP29 only, must be in
+                            adc mode
+                        </td>
+                        <td>float | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>on_event</code></td>
+                        <td><code>(callback: Callable[[dict], None])</code></td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><code>send</code></td>
+                        <td><code>(payload: dict)</code></td>
+                        <td>dict | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>close</code></td>
+                        <td><code>()</code></td>
+                        <td>—</td>
+                    </tr>
+                </table>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIXED — adc_read now sends "pin" key; gpio_set_mode()
+                        added
+                    </div>
+                    <div class="card-body">
+                        <code>adc_read(pin)</code> now sends
+                        <code>{"cmd": "adc_read", "pin": pin}</code>, matching
+                        what the firmware's
+                        <code>frame.get("pin")</code> expects. The parameter was
+                        also renamed from <code>channel</code> to
+                        <code>pin</code> to reflect that GP26–GP29 are passed as
+                        pin numbers, not channel indices.<br /><br />
+                        <code>gpio_set_mode(pin, mode, label="")</code> was
+                        added as a new convenience wrapper — it was missing
+                        entirely but required by <code>web.py</code>'s GPIO
+                        config endpoint:
+                        <pre><span class="kw">def</span> <span class="fn">gpio_set_mode</span>(self, pin: <span class="fn">int</span>, mode: <span class="fn">str</span>, label: <span class="fn">str</span> = <span class="str">""</span>) -> <span class="fn">bool</span>:
     reply = self.send({<span class="str">"cmd"</span>: <span class="str">"gpio_set_mode"</span>, <span class="str">"pin"</span>: pin, <span class="str">"mode"</span>: mode, <span class="str">"label"</span>: label})
     <span class="kw">return</span> <span class="fn">bool</span>(reply <span class="kw">and</span> reply.get(<span class="str">"ok"</span>))
 
@@ -652,35 +1136,121 @@ t_end = time.monotonic()     <span class="cm"># set after loop exits — correct
     <span class="kw">if</span> reply <span class="kw">and</span> reply.get(<span class="str">"ok"</span>):
         <span class="kw">return</span> reply.get(<span class="str">"value"</span>)
     <span class="kw">return</span> <span class="kw">None</span></pre>
-      </div>
-    </div>
-  </section>
+                    </div>
+                </div>
+            </section>
 
-  <section id="web">
-    <h2>Pi — <code>web.py</code> · Flask / SocketIO Server</h2>
-    <p>A thin integration layer. The Flask app is created at module level (not inside the factory) which means the global <code>app</code> and <code>socketio</code> objects exist before <code>create_app()</code> is called — this is a standard Flask pattern, but means you can't run two server instances in one process.</p>
-    <h3>HTTP Endpoints</h3>
-    <table>
-      <tr><th>Method</th><th>Path</th><th>Description</th></tr>
-      <tr><td>GET</td><td><code>/</code></td><td>Robot control dashboard (control.html)</td></tr>
-      <tr><td>GET</td><td><code>/gpio</code></td><td>RP2040 GPIO programming panel (gpio.html)</td></tr>
-      <tr><td>GET</td><td><code>/api/status</code></td><td>JSON snapshot: front/back distance, ADC voltages, RP2040 online flag</td></tr>
-      <tr><td>POST</td><td><code>/api/gpio/config</code></td><td>Set RP2040 pin modes; body: <code>{"configs": [{"pin": N, "mode": "input|output|adc|pwm|unused", "label": "..."}]}</code></td></tr>
-    </table>
-    <h3>WebSocket Events</h3>
-    <table>
-      <tr><th>Direction</th><th>Event</th><th>Payload</th></tr>
-      <tr><td>Client → Server</td><td><code>command</code></td><td><code>{"type": "forward|backward|left|right|dance|hi|stop", "value": float, "duty": int}</code></td></tr>
-      <tr><td>Client → Server</td><td><code>get_sensor</code></td><td><code>{"type": "front|back|adc|rp_gpio", "ch": int, "pin": int}</code></td></tr>
-      <tr><td>Server → Client</td><td><code>command_result</code></td><td><code>{"ok": bool, "cmd": str}</code></td></tr>
-      <tr><td>Server → Client</td><td><code>sensor_data</code></td><td><code>{"type": str, "cm": float, "raw": int, "voltage": float}</code></td></tr>
-      <tr><td>Server → Client</td><td><code>rp2040_event</code></td><td>Forwarded RP2040 async event frame</td></tr>
-    </table>
-    <div class="ok-card">
-      <div class="card-title">✓ FIXED — Templates use render_template(); no more CWD-relative open()</div>
-      <div class="card-body">
-        Both route handlers now use Flask's <code>render_template()</code>, which resolves paths against the <code>template_folder="../templates"</code> already configured on the app object. The service starts correctly regardless of working directory, and the file handle is never left open.
-        <pre><span class="cm"># Current (fixed)</span>
+            <section id="web">
+                <h2>Pi — <code>web.py</code> · Flask / SocketIO Server</h2>
+                <p>
+                    A thin integration layer. The Flask app is created at module
+                    level (not inside the factory) which means the global
+                    <code>app</code> and <code>socketio</code> objects exist
+                    before <code>create_app()</code> is called — this is a
+                    standard Flask pattern, but means you can't run two server
+                    instances in one process.
+                </p>
+                <h3>HTTP Endpoints</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Path</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td><code>/</code></td>
+                        <td>Robot control dashboard (control.html)</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td><code>/gpio</code></td>
+                        <td>RP2040 GPIO programming panel (gpio.html)</td>
+                    </tr>
+                    <tr>
+                        <td>GET</td>
+                        <td><code>/api/status</code></td>
+                        <td>
+                            JSON snapshot: front/back distance, ADC voltages,
+                            RP2040 online flag
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>POST</td>
+                        <td><code>/api/gpio/config</code></td>
+                        <td>
+                            Set RP2040 pin modes; body:
+                            <code
+                                >{"configs": [{"pin": N, "mode":
+                                "input|output|adc|pwm|unused", "label":
+                                "..."}]}</code
+                            >
+                        </td>
+                    </tr>
+                </table>
+                <h3>WebSocket Events</h3>
+                <table>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Event</th>
+                        <th>Payload</th>
+                    </tr>
+                    <tr>
+                        <td>Client → Server</td>
+                        <td><code>command</code></td>
+                        <td>
+                            <code
+                                >{"type":
+                                "forward|backward|left|right|dance|hi|stop",
+                                "value": float, "duty": int}</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Client → Server</td>
+                        <td><code>get_sensor</code></td>
+                        <td>
+                            <code
+                                >{"type": "front|back|adc|rp_gpio", "ch": int,
+                                "pin": int}</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Server → Client</td>
+                        <td><code>command_result</code></td>
+                        <td><code>{"ok": bool, "cmd": str}</code></td>
+                    </tr>
+                    <tr>
+                        <td>Server → Client</td>
+                        <td><code>sensor_data</code></td>
+                        <td>
+                            <code
+                                >{"type": str, "cm": float, "raw": int,
+                                "voltage": float}</code
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Server → Client</td>
+                        <td><code>rp2040_event</code></td>
+                        <td>Forwarded RP2040 async event frame</td>
+                    </tr>
+                </table>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIXED — Templates use render_template(); no more
+                        CWD-relative open()
+                    </div>
+                    <div class="card-body">
+                        Both route handlers now use Flask's
+                        <code>render_template()</code>, which resolves paths
+                        against the
+                        <code>template_folder="../templates"</code> already
+                        configured on the app object. The service starts
+                        correctly regardless of working directory, and the file
+                        handle is never left open.
+                        <pre><span class="cm"># Current (fixed)</span>
 <span class="kw">from</span> flask <span class="kw">import</span> Flask, render_template, jsonify, request
 
 <span class="fn">@app.route</span>(<span class="str">"/"</span>)
@@ -690,60 +1260,104 @@ t_end = time.monotonic()     <span class="cm"># set after loop exits — correct
 <span class="fn">@app.route</span>(<span class="str">"/gpio"</span>)
 <span class="kw">def</span> <span class="fn">gpio_page</span>():
     <span class="kw">return</span> render_template(<span class="str">"gpio.html"</span>)</pre>
-      </div>
-    </div>
-    <div class="ok-card">
-      <div class="card-title">✓ FIXED — /api/gpio/config calls gpio_set_mode() correctly</div>
-      <div class="card-body">
-        The GPIO config endpoint now calls <code>_rp.gpio_set_mode(pin, mode, label)</code>, sending the correct <code>gpio_set_mode</code> command to the firmware. The bogus <code>value</code> integer and the misrouted <code>gpio_write</code> call are removed. All five modes (<code>input</code>, <code>output</code>, <code>adc</code>, <code>pwm</code>, <code>unused</code>) are now properly forwarded.
-        <pre><span class="cm"># Current (fixed)</span>
+                    </div>
+                </div>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIXED — /api/gpio/config calls gpio_set_mode()
+                        correctly
+                    </div>
+                    <div class="card-body">
+                        The GPIO config endpoint now calls
+                        <code>_rp.gpio_set_mode(pin, mode, label)</code>,
+                        sending the correct <code>gpio_set_mode</code> command
+                        to the firmware. The bogus <code>value</code> integer
+                        and the misrouted <code>gpio_write</code> call are
+                        removed. All five modes (<code>input</code>,
+                        <code>output</code>, <code>adc</code>, <code>pwm</code>,
+                        <code>unused</code>) are now properly forwarded.
+                        <pre><span class="cm"># Current (fixed)</span>
 <span class="kw">for</span> cfg <span class="kw">in</span> configs:
     pin   = cfg.get(<span class="str">"pin"</span>)
     mode  = cfg.get(<span class="str">"mode"</span>, <span class="str">"input"</span>)   <span class="cm"># input|output|adc|pwm|unused</span>
     label = cfg.get(<span class="str">"label"</span>, <span class="str">""</span>)
     ok    = _rp.gpio_set_mode(pin, mode, label)
     results.append({<span class="str">"pin"</span>: pin, <span class="str">"ok"</span>: ok})</pre>
-      </div>
-    </div>
-  </section>
+                    </div>
+                </div>
+            </section>
 
-  <section id="wifi">
-    <h2>Pi — <code>wifi_provision.py</code> · WiFi Setup</h2>
-    <p>Handles the classic IoT "first-boot" problem: the device doesn't know your WiFi password yet. The approach is an AP hotspot + captive portal — like how home routers let you set them up via a connected laptop.</p>
-    <h3>Boot Decision Tree</h3>
-    <div class="flow">
-      <div class="flow-node">Check /etc/lumio/wifi.conf</div><div class="flow-arrow">→</div>
-      <div class="flow-node">nmcli connect</div><div class="flow-arrow">→</div>
-      <div class="flow-node">Success? Return True</div>
-    </div>
-    <div class="flow" style="margin-top:6px; margin-left: 20px;">
-      <div class="flow-arrow">↓ fail</div>
-    </div>
-    <div class="flow" style="margin-top:6px;">
-      <div class="flow-node">Start hotspot (nmcli)</div><div class="flow-arrow">→</div>
-      <div class="flow-node">Serve portal on :8080</div><div class="flow-arrow">→</div>
-      <div class="flow-node">User submits SSID+pw</div><div class="flow-arrow">→</div>
-      <div class="flow-node">Save → nmcli → teardown hotspot</div>
-    </div>
-    <h3>Defaults</h3>
-    <table>
-      <tr><th>Constant</th><th>Value</th></tr>
-      <tr><td>Hotspot SSID</td><td><code>Lumio-Setup</code></td></tr>
-      <tr><td>Hotspot Password</td><td><code>lumio1234</code></td></tr>
-      <tr><td>Portal IP</td><td><code>192.168.50.1</code></td></tr>
-      <tr><td>Portal Port</td><td><code>8080</code></td></tr>
-      <tr><td>Credentials file</td><td><code>/etc/lumio/wifi.conf</code></td></tr>
-    </table>
-  </section>
+            <section id="wifi">
+                <h2>Pi — <code>wifi_provision.py</code> · WiFi Setup</h2>
+                <p>
+                    Handles the classic IoT "first-boot" problem: the device
+                    doesn't know your WiFi password yet. The approach is an AP
+                    hotspot + captive portal — like how home routers let you set
+                    them up via a connected laptop.
+                </p>
+                <h3>Boot Decision Tree</h3>
+                <div class="flow">
+                    <div class="flow-node">Check /etc/lumio/wifi.conf</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">nmcli connect</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Success? Return True</div>
+                </div>
+                <div class="flow" style="margin-top: 6px; margin-left: 20px">
+                    <div class="flow-arrow">↓ fail</div>
+                </div>
+                <div class="flow" style="margin-top: 6px">
+                    <div class="flow-node">Start hotspot (nmcli)</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Serve portal on :8080</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">User submits SSID+pw</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">Save → nmcli → teardown hotspot</div>
+                </div>
+                <h3>Defaults</h3>
+                <table>
+                    <tr>
+                        <th>Constant</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Hotspot SSID</td>
+                        <td><code>Lumio-Setup</code></td>
+                    </tr>
+                    <tr>
+                        <td>Hotspot Password</td>
+                        <td><code>lumio1234</code></td>
+                    </tr>
+                    <tr>
+                        <td>Portal IP</td>
+                        <td><code>192.168.50.1</code></td>
+                    </tr>
+                    <tr>
+                        <td>Portal Port</td>
+                        <td><code>8080</code></td>
+                    </tr>
+                    <tr>
+                        <td>Credentials file</td>
+                        <td><code>/etc/lumio/wifi.conf</code></td>
+                    </tr>
+                </table>
+            </section>
 
-  <hr>
+            <hr />
 
-  <!-- RP2040 FIRMWARE -->
+            <!-- RP2040 FIRMWARE -->
 
-  <section id="fw-main">
-    <h2>RP2040 — <code>main.py</code> · Firmware Entry Point</h2>
-    <p>MicroPython entry point. Creates a UART on GP1(TX)/GP2(RX) at 115200 baud, instantiates <code>PinManager</code> and <code>Protocol</code>, then runs a tight loop: read UART → process complete JSON lines → poll inputs for edge events every 20 ms.</p>
-    <pre><span class="cm"># Main loop structure</span>
+            <section id="fw-main">
+                <h2>RP2040 — <code>main.py</code> · Firmware Entry Point</h2>
+                <p>
+                    MicroPython entry point. Creates a UART on GP1(TX)/GP2(RX)
+                    at 115200 baud, instantiates <code>PinManager</code> and
+                    <code>Protocol</code>, then runs a tight loop: read UART →
+                    process complete JSON lines → poll inputs for edge events
+                    every 20 ms.
+                </p>
+                <pre><span class="cm"># Main loop structure</span>
 <span class="kw">while</span> True:
     chunk = uart.read(<span class="num">256</span>)
     <span class="kw">if</span> chunk:
@@ -755,51 +1369,139 @@ t_end = time.monotonic()     <span class="cm"># set after loop exits — correct
     <span class="kw">if</span> ticks_diff(now, last_poll) >= POLL_MS:
         pm.poll_events(proto.push_event)  <span class="cm"># check input edges</span>
     sleep_ms(<span class="num">1</span>)</pre>
-    <p>The 1 ms sleep keeps the loop from burning CPU while still being responsive. POLL_MS=20 ms means input edge events are detected with up to 20 ms latency — fine for sensors, too slow for high-speed encoders.</p>
-  </section>
+                <p>
+                    The 1 ms sleep keeps the loop from burning CPU while still
+                    being responsive. POLL_MS=20 ms means input edge events are
+                    detected with up to 20 ms latency — fine for sensors, too
+                    slow for high-speed encoders.
+                </p>
+            </section>
 
-  <section id="fw-protocol">
-    <h2>RP2040 — <code>protocol.py</code> · Command Dispatcher</h2>
-    <p>A pure dispatcher: it owns the UART send path and maps command strings to <code>PinManager</code> method calls. No state of its own beyond references to UART and PinManager. Think of it like a router in your MQTT/RS-485 bridge — it reads a message, figures out which handler owns it, and forwards it.</p>
-    <h3>Command Handling Flow</h3>
-    <div class="flow">
-      <div class="flow-node">raw bytes from main.py</div><div class="flow-arrow">→</div>
-      <div class="flow-node">ujson.loads(raw)</div><div class="flow-arrow">→</div>
-      <div class="flow-node">frame.get("cmd")</div><div class="flow-arrow">→</div>
-      <div class="flow-node">PinManager method</div><div class="flow-arrow">→</div>
-      <div class="flow-node">_ok() or _err()</div>
-    </div>
-  </section>
+            <section id="fw-protocol">
+                <h2>RP2040 — <code>protocol.py</code> · Command Dispatcher</h2>
+                <p>
+                    A pure dispatcher: it owns the UART send path and maps
+                    command strings to <code>PinManager</code> method calls. No
+                    state of its own beyond references to UART and PinManager.
+                    Think of it like a router in your MQTT/RS-485 bridge — it
+                    reads a message, figures out which handler owns it, and
+                    forwards it.
+                </p>
+                <h3>Command Handling Flow</h3>
+                <div class="flow">
+                    <div class="flow-node">raw bytes from main.py</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">ujson.loads(raw)</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">frame.get("cmd")</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">PinManager method</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node">_ok() or _err()</div>
+                </div>
+            </section>
 
-  <section id="fw-pinmgr">
-    <h2>RP2040 — <code>pin_manager.py</code> · GPIO State Machine</h2>
-    <p>Each pin is a <code>PinState</code> object that holds its current mode, the live MicroPython machine object (<code>Pin</code>, <code>ADC</code>, or <code>PWM</code>), and last-known value for edge detection. The <code>release()</code> method calls <code>PWM.deinit()</code> before reconfiguring — like properly closing a file before reopening it in a different mode.</p>
-    <h3>Pin Availability</h3>
-    <table>
-      <tr><th>Pins</th><th>Status</th><th>Capabilities</th></tr>
-      <tr><td>GP1, GP2</td><td><span class="badge badge-danger">RESERVED</span></td><td>UART TX/RX — never reassignable</td></tr>
-      <tr><td>GP3–GP25</td><td><span class="badge badge-ok">FREE</span></td><td>Digital input, output, PWM</td></tr>
-      <tr><td>GP26–GP29</td><td><span class="badge badge-ok">FREE</span></td><td>Digital + ADC (channels 0–3)</td></tr>
-    </table>
-    <h3>PinState API</h3>
-    <table>
-      <tr><th>Method</th><th>Valid Modes</th><th>Returns</th></tr>
-      <tr><td><code>configure(mode, label)</code></td><td>any</td><td>bool</td></tr>
-      <tr><td><code>digital_read()</code></td><td>input, output</td><td>int | None</td></tr>
-      <tr><td><code>digital_write(value)</code></td><td>output</td><td>bool</td></tr>
-      <tr><td><code>adc_read_u16()</code></td><td>adc</td><td>int 0–65535 | None</td></tr>
-      <tr><td><code>adc_read_voltage()</code></td><td>adc</td><td>float 0.0–3.3 V | None</td></tr>
-      <tr><td><code>pwm_set(freq, duty)</code></td><td>pwm</td><td>bool</td></tr>
-      <tr><td><code>check_edge()</code></td><td>input</td><td>(changed: bool, value: int|None)</td></tr>
-    </table>
-    <p>Note: inputs are initialised with <code>Pin.PULL_DOWN</code>. If your sensor requires pull-up, you'll need to pass <code>Pin.PULL_UP</code> in <code>configure()</code> or use an external resistor.</p>
-  </section>
+            <section id="fw-pinmgr">
+                <h2>
+                    RP2040 — <code>pin_manager.py</code> · GPIO State Machine
+                </h2>
+                <p>
+                    Each pin is a <code>PinState</code> object that holds its
+                    current mode, the live MicroPython machine object
+                    (<code>Pin</code>, <code>ADC</code>, or <code>PWM</code>),
+                    and last-known value for edge detection. The
+                    <code>release()</code> method calls
+                    <code>PWM.deinit()</code> before reconfiguring — like
+                    properly closing a file before reopening it in a different
+                    mode.
+                </p>
+                <h3>Pin Availability</h3>
+                <table>
+                    <tr>
+                        <th>Pins</th>
+                        <th>Status</th>
+                        <th>Capabilities</th>
+                    </tr>
+                    <tr>
+                        <td>GP1, GP2</td>
+                        <td>
+                            <span class="badge badge-danger">RESERVED</span>
+                        </td>
+                        <td>UART TX/RX — never reassignable</td>
+                    </tr>
+                    <tr>
+                        <td>GP3–GP25</td>
+                        <td><span class="badge badge-ok">FREE</span></td>
+                        <td>Digital input, output, PWM</td>
+                    </tr>
+                    <tr>
+                        <td>GP26–GP29</td>
+                        <td><span class="badge badge-ok">FREE</span></td>
+                        <td>Digital + ADC (channels 0–3)</td>
+                    </tr>
+                </table>
+                <h3>PinState API</h3>
+                <table>
+                    <tr>
+                        <th>Method</th>
+                        <th>Valid Modes</th>
+                        <th>Returns</th>
+                    </tr>
+                    <tr>
+                        <td><code>configure(mode, label)</code></td>
+                        <td>any</td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>digital_read()</code></td>
+                        <td>input, output</td>
+                        <td>int | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>digital_write(value)</code></td>
+                        <td>output</td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>adc_read_u16()</code></td>
+                        <td>adc</td>
+                        <td>int 0–65535 | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>adc_read_voltage()</code></td>
+                        <td>adc</td>
+                        <td>float 0.0–3.3 V | None</td>
+                    </tr>
+                    <tr>
+                        <td><code>pwm_set(freq, duty)</code></td>
+                        <td>pwm</td>
+                        <td>bool</td>
+                    </tr>
+                    <tr>
+                        <td><code>check_edge()</code></td>
+                        <td>input</td>
+                        <td>(changed: bool, value: int|None)</td>
+                    </tr>
+                </table>
+                <p>
+                    Note: inputs are initialised with
+                    <code>Pin.PULL_DOWN</code>. If your sensor requires pull-up,
+                    you'll need to pass <code>Pin.PULL_UP</code> in
+                    <code>configure()</code> or use an external resistor.
+                </p>
+            </section>
 
-  <section id="fw-protocol-ref">
-    <h2>RP2040 ↔ Pi — Full Protocol Reference</h2>
-    <p>All messages are newline-terminated JSON (<code>\n</code>). The Pi is always master: it sends commands, the RP2040 replies synchronously. The RP2040 can additionally push unsolicited <code>event</code> frames when an input pin changes state.</p>
-    <h3>Commands (Pi → RP2040)</h3>
-    <pre><span class="cm">// Health check</span>
+            <section id="fw-protocol-ref">
+                <h2>RP2040 ↔ Pi — Full Protocol Reference</h2>
+                <p>
+                    All messages are newline-terminated JSON (<code>\n</code>).
+                    The Pi is always master: it sends commands, the RP2040
+                    replies synchronously. The RP2040 can additionally push
+                    unsolicited <code>event</code> frames when an input pin
+                    changes state.
+                </p>
+                <h3>Commands (Pi → RP2040)</h3>
+                <pre><span class="cm">// Health check</span>
 {<span class="str">"cmd"</span>: <span class="str">"ping"</span>}
 
 <span class="cm">// Configure a pin's mode and optional label</span>
@@ -823,173 +1525,161 @@ t_end = time.monotonic()     <span class="cm"># set after loop exits — correct
 {<span class="str">"cmd"</span>: <span class="str">"list_pins"</span>}   <span class="cm">// all assignable pins</span>
 {<span class="str">"cmd"</span>: <span class="str">"get_all"</span>}     <span class="cm">// only non-unused pins</span></pre>
 
-    <h3>Replies (RP2040 → Pi)</h3>
-    <pre>{<span class="str">"ok"</span>: <span class="kw">true</span>}
+                <h3>Replies (RP2040 → Pi)</h3>
+                <pre>{<span class="str">"ok"</span>: <span class="kw">true</span>}
 {<span class="str">"ok"</span>: <span class="kw">true</span>,  <span class="str">"value"</span>: <span class="num">1</span>}          <span class="cm">// gpio_read</span>
 {<span class="str">"ok"</span>: <span class="kw">true</span>,  <span class="str">"value"</span>: <span class="num">1.6523</span>}     <span class="cm">// adc_read (voltage, 3.3V ref)</span>
 {<span class="str">"ok"</span>: <span class="kw">true</span>,  <span class="str">"pins"</span>: [{<span class="str">"pin"</span>: <span class="num">5</span>, <span class="str">"mode"</span>: <span class="str">"input"</span>, <span class="str">"label"</span>: <span class="str">"IR"</span>, <span class="str">"value"</span>: <span class="num">0</span>}, ...]}
 {<span class="str">"ok"</span>: <span class="kw">false</span>, <span class="str">"error"</span>: <span class="str">"pin 26 not in adc mode"</span>}</pre>
 
-    <h3>Async Events (RP2040 → Pi, unsolicited)</h3>
-    <pre>{<span class="str">"event"</span>: <span class="str">"change"</span>, <span class="str">"pin"</span>: <span class="num">5</span>, <span class="str">"value"</span>: <span class="num">1</span>}   <span class="cm">// rising edge</span>
+                <h3>Async Events (RP2040 → Pi, unsolicited)</h3>
+                <pre>{<span class="str">"event"</span>: <span class="str">"change"</span>, <span class="str">"pin"</span>: <span class="num">5</span>, <span class="str">"value"</span>: <span class="num">1</span>}   <span class="cm">// rising edge</span>
 {<span class="str">"event"</span>: <span class="str">"change"</span>, <span class="str">"pin"</span>: <span class="num">5</span>, <span class="str">"value"</span>: <span class="num">0</span>}   <span class="cm">// falling edge</span></pre>
-  </section>
+            </section>
 
-  <hr>
+            <hr />
 
-  <!-- CHANGELOG -->
-  <section id="bugs">
-    <h2>✓ Resolved Issues — Changelog</h2>
-    <p>Four bugs were identified and fixed across three files. The warning about BCM 35 remains open — it requires physical board verification before first power-on.</p>
+            <!-- CHANGELOG -->
+            <section id="bugs">
+                <h2>✓ Resolved Issues — Changelog</h2>
+                <p>
+                    Four bugs were identified and fixed across three files. The
+                    warning about BCM 35 remains open — it requires physical
+                    board verification before first power-on.
+                </p>
 
-    <div class="ok-card">
-      <div class="card-title">✓ FIX 1 — <code>robot.py</code> · t_start / t_end moved outside while-loop body</div>
-      <div class="card-body">
-        <strong>File:</strong> <code>lumio/lumio/robot.py</code>, <code>measure_distance_cm()</code><br><br>
-        Both timestamps were reassigned on every loop iteration, so they captured the last-before-exit iteration time rather than the true echo edge. Moving them to after each loop exits gives accurate pulse timing.
-      </div>
-    </div>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIX 1 — <code>robot.py</code> · t_start / t_end moved
+                        outside while-loop body
+                    </div>
+                    <div class="card-body">
+                        <strong>File:</strong>
+                        <code>lumio/lumio/robot.py</code>,
+                        <code>measure_distance_cm()</code><br /><br />
+                        Both timestamps were reassigned on every loop iteration,
+                        so they captured the last-before-exit iteration time
+                        rather than the true echo edge. Moving them to after
+                        each loop exits gives accurate pulse timing.
+                    </div>
+                </div>
 
-    <div class="ok-card">
-      <div class="card-title">✓ FIX 2 — <code>coprocessor.py</code> · adc_read key corrected from "ch" to "pin"</div>
-      <div class="card-body">
-        <strong>File:</strong> <code>lumio/lumio/coprocessor.py</code>, <code>adc_read()</code><br><br>
-        Key mismatch between Pi and firmware: Pi was sending <code>"ch"</code>, firmware reads <code>frame.get("pin")</code>. All co-processor ADC reads were silently returning error responses. Fixed to <code>"pin"</code>; parameter renamed from <code>channel</code> to <code>pin</code> accordingly.
-      </div>
-    </div>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIX 2 — <code>coprocessor.py</code> · adc_read key
+                        corrected from "ch" to "pin"
+                    </div>
+                    <div class="card-body">
+                        <strong>File:</strong>
+                        <code>lumio/lumio/coprocessor.py</code>,
+                        <code>adc_read()</code><br /><br />
+                        Key mismatch between Pi and firmware: Pi was sending
+                        <code>"ch"</code>, firmware reads
+                        <code>frame.get("pin")</code>. All co-processor ADC
+                        reads were silently returning error responses. Fixed to
+                        <code>"pin"</code>; parameter renamed from
+                        <code>channel</code> to <code>pin</code> accordingly.
+                    </div>
+                </div>
 
-    <div class="ok-card">
-      <div class="card-title">✓ FIX 3 — <code>coprocessor.py</code> · gpio_set_mode() added</div>
-      <div class="card-body">
-        <strong>File:</strong> <code>lumio/lumio/coprocessor.py</code><br><br>
-        The method was missing entirely but required by <code>web.py</code>'s GPIO config endpoint. Added as a new convenience wrapper that sends <code>{"cmd": "gpio_set_mode", "pin": ..., "mode": ..., "label": ...}</code> — a command the firmware already fully supported.
-      </div>
-    </div>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIX 3 — <code>coprocessor.py</code> · gpio_set_mode()
+                        added
+                    </div>
+                    <div class="card-body">
+                        <strong>File:</strong>
+                        <code>lumio/lumio/coprocessor.py</code><br /><br />
+                        The method was missing entirely but required by
+                        <code>web.py</code>'s GPIO config endpoint. Added as a
+                        new convenience wrapper that sends
+                        <code
+                            >{"cmd": "gpio_set_mode", "pin": ..., "mode": ...,
+                            "label": ...}</code
+                        >
+                        — a command the firmware already fully supported.
+                    </div>
+                </div>
 
-    <div class="ok-card">
-      <div class="card-title">✓ FIX 4 — <code>web.py</code> · render_template() + gpio_set_mode() in config endpoint</div>
-      <div class="card-body">
-        <strong>File:</strong> <code>lumio/lumio/web.py</code><br><br>
-        Two fixes in one file: (1) Both route handlers replaced <code>render_template_string(open(...))</code> with <code>render_template()</code>, which resolves paths correctly via Flask's template folder regardless of CWD. (2) The <code>/api/gpio/config</code> endpoint replaced the misrouted <code>gpio_write</code> call with <code>gpio_set_mode(pin, mode, label)</code>.
-      </div>
-    </div>
+                <div class="ok-card">
+                    <div class="card-title">
+                        ✓ FIX 4 — <code>web.py</code> · render_template() +
+                        gpio_set_mode() in config endpoint
+                    </div>
+                    <div class="card-body">
+                        <strong>File:</strong> <code>lumio/lumio/web.py</code
+                        ><br /><br />
+                        Two fixes in one file: (1) Both route handlers replaced
+                        <code>render_template_string(open(...))</code> with
+                        <code>render_template()</code>, which resolves paths
+                        correctly via Flask's template folder regardless of CWD.
+                        (2) The <code>/api/gpio/config</code> endpoint replaced
+                        the misrouted <code>gpio_write</code> call with
+                        <code>gpio_set_mode(pin, mode, label)</code>.
+                    </div>
+                </div>
 
-    <div class="warn-card">
-      <div class="card-title">⚠ OPEN — <code>config.py</code> · BCM 35 for ADC_MISO — verify against your board</div>
-      <div class="card-body">
-        <strong>File:</strong> <code>lumio/lumio/config.py</code>, line 28<br><br>
-        BCM 35 is not a standard 40-pin header GPIO on all Pi 5 variants. Confirm the actual BCM number for physical pin 19 on your specific board with <code>gpio readall</code> before powering on. A wrong pin could cause a GPIO conflict or silently broken SPI reads. No code change made — requires hardware confirmation first.
-      </div>
-    </div>
+                <div class="warn-card">
+                    <div class="card-title">
+                        ⚠ OPEN — <code>config.py</code> · BCM 35 for ADC_MISO —
+                        verify against your board
+                    </div>
+                    <div class="card-body">
+                        <strong>File:</strong>
+                        <code>lumio/lumio/config.py</code>, line 28<br /><br />
+                        BCM 35 is not a standard 40-pin header GPIO on all Pi 5
+                        variants. Confirm the actual BCM number for physical pin
+                        19 on your specific board with
+                        <code>gpio readall</code> before powering on. A wrong
+                        pin could cause a GPIO conflict or silently broken SPI
+                        reads. No code change made — requires hardware
+                        confirmation first.
+                    </div>
+                </div>
 
-    <div class="ok-card">
-      <div class="card-title">✓ Everything else is solid</div>
-      <div class="card-body">
-        Graceful degradation in all hardware paths (GPIO unavailable, UART not open, RP2040 offline). Thread safety on motor commands. Protocol symmetry between firmware and host for <code>gpio_read</code>, <code>gpio_write</code>, <code>ping</code>, <code>list_pins</code>, <code>get_all</code>, and async events. PWM duty clamping. Pin reservation enforcement. Edge detection state machine. Systemd service file is correct. Dependency management via <code>uv</code>/<code>pyproject.toml</code> is clean.
-      </div>
-    </div>
-  </section>
+                <div class="ok-card">
+                    <div class="card-title">✓ Everything else is solid</div>
+                    <div class="card-body">
+                        Graceful degradation in all hardware paths (GPIO
+                        unavailable, UART not open, RP2040 offline). Thread
+                        safety on motor commands. Protocol symmetry between
+                        firmware and host for <code>gpio_read</code>,
+                        <code>gpio_write</code>, <code>ping</code>,
+                        <code>list_pins</code>, <code>get_all</code>, and async
+                        events. PWM duty clamping. Pin reservation enforcement.
+                        Edge detection state machine. Systemd service file is
+                        correct. Dependency management via <code>uv</code>/<code
+                            >pyproject.toml</code
+                        >
+                        is clean.
+                    </div>
+                </div>
+            </section>
 
-  <hr>
+            <hr />
+        </main>
 
-  <!-- TOOLING -->
-  <section id="tooling">
-    <h2>Documentation Tooling Guide</h2>
-    <p>The best docs setup for an embedded project like Lumio is a layered approach — think of it like your Gitea/Postgres server stack: each tool has a job, and they compose.</p>
-
-    <h3>Option A — Sphinx (Python-native, recommended)</h3>
-    <p>Sphinx is the standard for Python projects. It reads docstrings from your modules automatically via <code>autodoc</code>, generates HTML/PDF/ePub, and with <code>sphinx-autoapi</code> you get zero-config API docs.</p>
-    <pre><span class="cm"># Install</span>
-uv add --dev sphinx sphinx-autoapi furo
-
-<span class="cm"># Init (run once from project root)</span>
-sphinx-quickstart docs/
-
-<span class="cm"># conf.py additions</span>
-extensions = [<span class="str">"autoapi.extension"</span>, <span class="str">"sphinx.ext.napoleon"</span>]
-autoapi_dirs = [<span class="str">"lumio"</span>]
-html_theme = <span class="str">"furo"</span>    <span class="cm"># clean dark/light theme</span>
-
-<span class="cm"># Build</span>
-sphinx-build -b html docs/ docs/_build/html</pre>
-    <p>On your Gitea/HP Z2 server, add a <code>post-receive</code> hook to rebuild docs on push. Serve the <code>_build/html/</code> folder via Nginx alongside your other services.</p>
-
-    <h3>Option B — MkDocs + Material (simpler, markdown-first)</h3>
-    <p>If you prefer writing docs in Markdown (which you're already doing in READMEs), MkDocs with the Material theme is extremely polished and zero-friction.</p>
-    <pre><span class="cm"># Install</span>
-uv add --dev mkdocs mkdocs-material mkdocstrings[python]
-
-<span class="cm"># mkdocs.yml</span>
-site_name: Lumio V2 Docs
-theme:
-  name: material
-  palette:
-    scheme: slate      <span class="cm"># dark theme</span>
-plugins:
-  - mkdocstrings:
-      handlers:
-        python:
-          paths: [lumio]
-
-<span class="cm"># Build &amp; serve</span>
-mkdocs serve        <span class="cm"># live reload on localhost:8000</span>
-mkdocs build        <span class="cm"># outputs to site/</span></pre>
-
-    <h3>Option C — Inline: pdoc (zero config)</h3>
-    <p>For a quick, always-up-to-date API reference with zero config — just docstrings and <code>pdoc</code>:</p>
-    <pre><span class="cm"># One command, serve docs for the lumio package</span>
-uvx pdoc lumio --host localhost --port 8080</pre>
-
-    <h3>For the RP2040 Firmware (MicroPython)</h3>
-    <p>MicroPython isn't supported by standard Python doc tools. Best options:</p>
-    <table>
-      <tr><th>Tool</th><th>Approach</th></tr>
-      <tr><td>Markdown files</td><td>Write <code>docs/firmware/</code> manually — already started in the README. Keep it next to the source in the repo.</td></tr>
-      <tr><td>MkDocs</td><td>Include the firmware markdown files in your MkDocs <code>nav</code> alongside the auto-generated Pi docs.</td></tr>
-    </table>
-
-    <h3>Hosting on Your Gitea Server</h3>
-    <p>Since you already run Gitea on the HP Z2, the cleanest approach is:</p>
-    <pre><span class="cm"># Nginx config snippet — serve built docs at docs.lumio.local</span>
-server {
-    listen 80;
-    server_name docs.lumio.local;
-    root /opt/lumio-docs/site;   <span class="cm"># MkDocs output</span>
-    index index.html;
-    location / { try_files $uri $uri/ =404; }
-}</pre>
-    <p>Pair this with a Gitea Actions (or a simple <code>post-receive</code> git hook) that runs <code>mkdocs build</code> and copies to <code>/opt/lumio-docs/site</code> on every push to main. You get CI-generated docs with zero extra infrastructure.</p>
-
-    <h3>Quick Comparison</h3>
-    <table>
-      <tr><th>Tool</th><th>Best for</th><th>Setup effort</th><th>Output</th></tr>
-      <tr><td>Sphinx + Furo</td><td>Python-native autodoc, formal</td><td>Medium</td><td>HTML, PDF, ePub</td></tr>
-      <tr><td>MkDocs + Material</td><td>Markdown-first, beautiful</td><td>Low</td><td>HTML</td></tr>
-      <tr><td>pdoc</td><td>Quick API reference, zero config</td><td>Minimal</td><td>HTML (served)</td></tr>
-      <tr><td>Gitea Wiki</td><td>Informal notes, no build step</td><td>None</td><td>Gitea web UI</td></tr>
-    </table>
-    <div class="info-card">
-      <div class="card-title">💡 Recommendation for Lumio</div>
-      <div class="card-body">Use <strong>MkDocs + Material</strong>. You're already writing Markdown READMEs, the firmware docs fit naturally as Markdown pages, and <code>mkdocstrings</code> auto-generates the Pi-side API reference from your existing docstrings with one line of config. Host on your Z2 behind Tailscale so it's accessible from anywhere on your network.</div>
-    </div>
-  </section>
-
-</main>
-
-<script>
-  // Highlight active nav link on scroll
-  const sections = document.querySelectorAll('section[id], div[id]');
-  const navLinks = document.querySelectorAll('nav a');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
-        });
-      }
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  sections.forEach(s => observer.observe(s));
-</script>
-</body>
+        <script>
+            // Highlight active nav link on scroll
+            const sections = document.querySelectorAll("section[id], div[id]");
+            const navLinks = document.querySelectorAll("nav a");
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((e) => {
+                        if (e.isIntersecting) {
+                            navLinks.forEach((a) => {
+                                a.classList.toggle(
+                                    "active",
+                                    a.getAttribute("href") ===
+                                        "#" + e.target.id,
+                                );
+                            });
+                        }
+                    });
+                },
+                { rootMargin: "-20% 0px -70% 0px" },
+            );
+            sections.forEach((s) => observer.observe(s));
+        </script>
+    </body>
 </html>
