@@ -366,6 +366,16 @@
                 color: var(--accent3);
             }
 
+            /* ── Architecture SVG ── */
+            .arch-svg-wrap {
+                background: var(--bg2);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 24px;
+                margin: 16px 0 24px;
+                overflow-x: auto;
+            }
+
             /* ── Module cards ── */
             .module-grid {
                 display: grid;
@@ -553,43 +563,95 @@
                     polling, hardware-level pin management). They communicate
                     via a simple JSON postal system over UART.
                 </p>
-                <div class="arch">
-                    <span class="highlight"
-                        >┌───────────────────────────────────────────────────────────────────┐</span
-                    >
-                    <span class="highlight">│ RASPBERRY PI 5 (host) │</span>
-                    <span class="highlight">│ │</span>
-                    │ <span class="highlight">main.py</span> ──bootstrap──▶
-                    <span class="highlight">robot.py</span> (L298N, HC-SR04) │ │
-                    │ <span class="highlight">adc.py</span> (MCP3008 bit-bang
-                    SPI) │ │ │
-                    <span class="highlight">coprocessor.py</span> (UART→RP2040)
-                    │ │ │
-                    <span class="highlight">wifi_provision.py</span> (nmcli
-                    hotspot) │ │ └──────────▶
-                    <span class="highlight">web.py</span> (Flask + SocketIO) │
-                    <span class="highlight"
-                        >└───────────────────────────┬───────────────────────────────────────┘</span
-                    >
-                    <span class="arrow">│ UART 115200 8N1</span>
-                    <span class="arrow"
-                        >│ GP14(TX)↔GP1(RX) GP15(RX)↔GP2(TX)</span
-                    >
-                    <span class="highlight"
-                        >┌───────────────────────────▼───────────────────────────────────────┐</span
-                    >
-                    <span class="highlight"
-                        >│ RP2040 (co-processor / MicroPython) │</span
-                    >
-                    <span class="highlight">│ │</span>
-                    │ <span class="highlight">main.py</span> ──loop──▶
-                    <span class="highlight">protocol.py</span> (JSON parse /
-                    dispatch) │ │
-                    <span class="highlight">pin_manager.py</span> (GP3–GP29,
-                    ADC, PWM) │
-                    <span class="highlight"
-                        >└───────────────────────────────────────────────────────────────────┘</span
-                    >
+                <div class="arch-svg-wrap">
+                  <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:'JetBrains Mono',monospace;">
+                    <defs>
+                      <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#f59e0b"/>
+                      </marker>
+                      <marker id="ah2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#f59e0b"/>
+                      </marker>
+                    </defs>
+
+                    <!-- Pi box -->
+                    <rect x="30" y="20" width="660" height="160" rx="8"
+                          fill="#10131a" stroke="#06b6d4" stroke-width="1.5"/>
+                    <!-- Pi header bar -->
+                    <rect x="30" y="20" width="660" height="32" rx="8" fill="#06b6d4" fill-opacity="0.15"/>
+                    <rect x="30" y="40" width="660" height="12" fill="#06b6d4" fill-opacity="0.15"/>
+                    <text x="360" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#06b6d4" letter-spacing="1">RASPBERRY PI 5 — host</text>
+
+                    <!-- main.py node -->
+                    <rect x="60" y="72" width="90" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="105" y="90" text-anchor="middle" font-size="11" fill="#06b6d4">main.py</text>
+
+                    <!-- bootstrap arrow -->
+                    <line x1="150" y1="86" x2="192" y2="86" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#ah)"/>
+                    <text x="170" y="80" text-anchor="middle" font-size="9" fill="#f59e0b">bootstrap</text>
+
+                    <!-- robot.py -->
+                    <rect x="193" y="72" width="148" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="267" y="87" text-anchor="middle" font-size="11" fill="#06b6d4">robot.py</text>
+                    <text x="267" y="99" text-anchor="middle" font-size="9" fill="#64748b">L298N · HC-SR04</text>
+
+                    <!-- adc.py -->
+                    <rect x="193" y="112" width="148" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="267" y="127" text-anchor="middle" font-size="11" fill="#06b6d4">adc.py</text>
+                    <text x="267" y="139" text-anchor="middle" font-size="9" fill="#64748b">MCP3008 bit-bang SPI</text>
+
+                    <!-- coprocessor.py -->
+                    <rect x="370" y="72" width="170" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="455" y="87" text-anchor="middle" font-size="11" fill="#06b6d4">coprocessor.py</text>
+                    <text x="455" y="99" text-anchor="middle" font-size="9" fill="#64748b">UART → RP2040</text>
+
+                    <!-- wifi_provision.py -->
+                    <rect x="370" y="112" width="170" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="455" y="127" text-anchor="middle" font-size="11" fill="#06b6d4">wifi_provision.py</text>
+                    <text x="455" y="139" text-anchor="middle" font-size="9" fill="#64748b">nmcli hotspot</text>
+
+                    <!-- web.py -->
+                    <rect x="570" y="92" width="100" height="28" rx="5" fill="#161b26" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="620" y="107" text-anchor="middle" font-size="11" fill="#3b82f6">web.py</text>
+                    <text x="620" y="119" text-anchor="middle" font-size="9" fill="#64748b">Flask + SocketIO</text>
+
+                    <!-- main → web arrow -->
+                    <path d="M 105 100 Q 105 152 570 106" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ah2)"/>
+                    <text x="340" y="162" text-anchor="middle" font-size="9" fill="#f59e0b">serves UI</text>
+
+                    <!-- UART bridge -->
+                    <line x1="360" y1="200" x2="360" y2="240" stroke="#f59e0b" stroke-width="2" marker-end="url(#ah)"/>
+                    <text x="360" y="228" text-anchor="middle" font-size="10" font-weight="600" fill="#f59e0b">UART 115200 8N1</text>
+                    <text x="360" y="242" text-anchor="middle" font-size="9" fill="#94a3b8">GP14 TX ↔ GP1 RX   ·   GP15 RX ↔ GP2 TX</text>
+
+                    <!-- RP2040 box -->
+                    <rect x="30" y="255" width="660" height="125" rx="8"
+                          fill="#10131a" stroke="#3b82f6" stroke-width="1.5"/>
+                    <rect x="30" y="255" width="660" height="32" rx="8" fill="#3b82f6" fill-opacity="0.12"/>
+                    <rect x="30" y="275" width="660" height="12" fill="#3b82f6" fill-opacity="0.12"/>
+                    <text x="360" y="277" text-anchor="middle" font-size="12" font-weight="600" fill="#3b82f6" letter-spacing="1">RP2040 — co-processor / MicroPython</text>
+
+                    <!-- rp main.py -->
+                    <rect x="60" y="303" width="90" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="105" y="321" text-anchor="middle" font-size="11" fill="#3b82f6">main.py</text>
+
+                    <!-- loop arrow -->
+                    <line x1="150" y1="317" x2="192" y2="317" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#ah)"/>
+                    <text x="170" y="311" text-anchor="middle" font-size="9" fill="#f59e0b">loop</text>
+
+                    <!-- protocol.py -->
+                    <rect x="193" y="303" width="170" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="278" y="318" text-anchor="middle" font-size="11" fill="#3b82f6">protocol.py</text>
+                    <text x="278" y="330" text-anchor="middle" font-size="9" fill="#64748b">JSON parse / dispatch</text>
+
+                    <!-- pin_manager.py -->
+                    <rect x="390" y="303" width="170" height="28" rx="5" fill="#161b26" stroke="#1e2635" stroke-width="1"/>
+                    <text x="475" y="318" text-anchor="middle" font-size="11" fill="#3b82f6">pin_manager.py</text>
+                    <text x="475" y="330" text-anchor="middle" font-size="9" fill="#64748b">GP3–GP29 · ADC · PWM</text>
+
+                    <!-- protocol → pin_manager -->
+                    <line x1="363" y1="317" x2="388" y2="317" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#ah)"/>
+                  </svg>
                 </div>
             </section>
 
